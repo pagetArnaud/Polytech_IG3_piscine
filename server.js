@@ -6,6 +6,7 @@ var http = require('http').Server(app);
 app.get("/", function (req, res) {
     res.setHeader('Content-Type', 'text/plain');
     res.send('hello world');
+    console.log("we did it")
 
 
 });
