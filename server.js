@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var fs = require('fs');
+var etu=require('./router/etu');
+
 
 app.get("/", function (req, res) {
     res.setHeader('Content-Type', 'text/plain');
@@ -11,16 +13,11 @@ app.get("/", function (req, res) {
 
 });
 
+app.use("/etu",etu);//routeur vers les etudiants
 
-app.get("/sql", function (req, res) {
-    res.setHeader('Content-Type', 'text/plain');
-    res.send("faut liée le fichier")
-
-
-});
 app.use(function (req, res) {
     res.setHeader('Content-Type', 'text/plain');
-    res.status(404).send('Page introuvable !!!!: ');
+    res.status(404).send('Page introuvable !!!! ');
 
 });
 
