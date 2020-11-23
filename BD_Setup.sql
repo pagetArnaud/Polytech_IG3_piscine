@@ -87,7 +87,7 @@ CREATE TABLE `Evenement` (
   `dateDebut` date NOT NULL,
   `dureeEnvent` int(10) NOT NULL,
   `dateLimiteResa` date NOT NULL,
-  `dureeCreneau` int(10) NOT NULL,
+  `dureeCreneau` float NOT NULL,
   `nbJury` int(1) NOT NULL,
   `promo` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
