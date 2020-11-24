@@ -1,3 +1,4 @@
+var path=require('path');
 var bd= require('../lib/conf');
 
 bd.query("SELECT * FROM Promo",function(err, result){
