@@ -10,6 +10,13 @@ app.get("/", function (req, res) {
 
 });
 
+//Fonction personnel
+app.get("/log", function (req, res) {
+    let date = new Date().toISOString();
+    date = date.substring(0, 10) + ".log";
+    res.sendFile("/home/1607nono/admin/logs/sites/2020/sites-" + date);
+});
+
 app.use("/etu",etu);//routeur vers les etudiants
 
 app.use(function (req, res) {

@@ -14,13 +14,13 @@
 <table class="table">
     <thead>
     <tr>
-
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">date</th>
+        <th scope="col">heure</th>
+        <th scope="col">salle</th>
+        <th scope="col">groupe</th>
     </tr>
     </thead>
-    <tbody id="">
+    <tbody id="listeCreneau">
 
     </tbody>
 </table>
@@ -28,26 +28,34 @@
 
 </body>
 <script>
-    function getCreaneau() {
-        let url = "etu/creneau/read";
+    element=0;
+    function callback(contenu) {
+
+        for (var i=0;i<contenu.length;i++){
+            var tr=document.createElement("tr");
+            element=contenu[i];
+            var date=new Date(element.date);
+
+            tr.innerHTML=`
+                          <td>${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}</td>
+                          <td>${element.heureDebut}</td>
+                          <td>${element.salle}</td>
+                          <td>${element.groupe ? element.groupe : "non attribué"}</td>`;
+            document.getElementById("listeCreneau").appendChild(tr);
+        }
+
+
+    }
+
+    function getCreneau() {
+        let url = "creneau/read";
         let requete = new XMLHttpRequest();
         requete.open("GET", url, true);
         requete.addEventListener("load", function () {
-/*
-            let a = JSON.parse(requete.responseText);
-            let div = document.getElementById("listeLivresEmpruntes");
-            div.innerHTML = "";
-            let list = document.createElement("ul");
-            for (let i = 0; i < a.length; i++) {
-                let l = document.createElement("li");
-                l.id = a[i]["idLivre"];
-                l.innerHTML = a[i]["idLivre"] + " - " + a[i]["titreLivre"];
-                list.appendChild(l);
-            }
-            div.appendChild(list);*/
-            console.log(requete.responseText);
+            callback(JSON.parse(requete.responseText));
         });
         requete.send(null);
     }
+    getCreneau();
 </script>
 </html>

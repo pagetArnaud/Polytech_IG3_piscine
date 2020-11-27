@@ -20,9 +20,8 @@ router.get('/creneau', function (req, res) {
 
 router.get('/creneau/read', function (req, res) {
     var prom =model_creneau.getAllcreneau();
-
     prom.then((value) => {
-        console.log("La valeur reussi est  :"+value);
+
         res.send(value);
 
     }).catch(
