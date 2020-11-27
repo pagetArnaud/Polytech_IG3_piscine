@@ -34,7 +34,6 @@ function getPromo(num) {
 function getAllPromo() {
     return new Promise((resolve, reject) => {
 
-
         bd.query ('SELECT * FROM Promo',
             function(err, result){
                 if (err){

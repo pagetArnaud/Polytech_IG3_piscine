@@ -3,6 +3,7 @@ var app = express();
 var http = require('http').Server(app);
 var fs = require('fs');
 var etu=require(path.join(__dirname,"etu"));
+var admin=require(path.join(__dirname,"admin"));
 
 app.get("/", function (req, res) {
     res.setHeader('Content-Type', 'text/plain');
@@ -18,6 +19,7 @@ app.get("/log", function (req, res) {
 });
 
 app.use("/etu",etu);//routeur vers les etudiants
+app.use("/admin",admin);//routeur admin
 
 app.use(function (req, res) {
     res.setHeader('Content-Type', 'text/plain');
