@@ -2,24 +2,21 @@
 var bd= require(path.join(__dirname,"../lib/conf"));
 
 //creneau
-
-function getcreneau(num,next) {
+//SELECT p.groupe,e.nom, e.prenom FROM Creneau c JOIN Participe p ON p.groupe=c.groupe JOIN Enseignant e ON p.enseignant=e.id
+function getcreneau(num) {
+    return new Promise((resolve, reject) => {
     bd.query ('SELECT * FROM creneau WHERE num=?',
         [num],
         function(err, result){
-            if (err) throw err;
-            next(result);
+            if (err){
+                reject(err);
+            }
+            resolve(result);
         }
     );
+    });
 }
 function getAllcreneau() {
-    /*
-    var res= bd.query ('SELECT * FROM creneau',
-        function(err, result){
-            if (err) throw err;
-            next(result);
-        }
-    );*/
     return new Promise((resolve, reject) => {
         bd.query ('SELECT * FROM Creneau',
             function(err, result){
