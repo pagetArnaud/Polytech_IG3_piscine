@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-1607nono.alwaysdata.net
--- Generation Time: Nov 21, 2020 at 04:48 PM
+-- Generation Time: Nov 28, 2020 at 01:28 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.29
 
@@ -22,6 +22,39 @@ SET time_zone = "+00:00";
 -- Database: `1607nono_piscine`
 --
 
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE
+    DEFINER = `1607nono`@`%` PROCEDURE `insert_creneau`(IN `datecreneau` DATE, IN `heuredebut` TIME, IN `duree` TIME,
+                                                        IN `heurefin` TIME, IN `evenement` INT(11),
+                                                        IN `salle` VARCHAR(8)) MODIFIES SQL DATA
+    COMMENT 'ajouter des creneau de heuredebut de duree interval jusqua hefin'
+BEGIN
+    DECLARE heure time;
+    SELECT heuredebut INTO heure;
+    WHILE (heure < heurefin)
+        DO
+            INSERT INTO `Creneau` (`date`, `heureDebut`, `salle`, `event`)
+            VALUES (datecreneau, heure, salle, evenement);
+            SELECT ADDTIME(heure, duree) INTO heure;
+        END WHILE;
+END$$
+
+CREATE
+    DEFINER = `1607nono`@`%` PROCEDURE `test_proc`() MODIFIES SQL DATA
+BEGIN
+    DECLARE i INT DEFAULT 1;
+    WHILE i < 100
+        DO
+            INSERT INTO test VALUES (i);
+            SET i = i + 1;
+        END WHILE;
+END$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -33,6 +66,14 @@ CREATE TABLE `Composer` (
   `groupe` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `Composer`
+--
+
+INSERT INTO `Composer` (`etudiant`, `groupe`)
+VALUES ('000000000A', 1),
+       ('000000000B', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -40,13 +81,26 @@ CREATE TABLE `Composer` (
 --
 
 CREATE TABLE `Creneau` (
-  `num` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `heureDebut` time NOT NULL,
-  `salle` varchar(8) NOT NULL,
-  `groupe` int(11) DEFAULT NULL,
-  `event` int(11) NOT NULL
+                           `num`        int(11)    NOT NULL,
+                           `date`       date       NOT NULL,
+                           `heureDebut` time       NOT NULL,
+                           `salle`      varchar(8) NOT NULL,
+                           `groupe`     int(11) DEFAULT NULL,
+                           `event`      int(10)    NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `Creneau`
+--
+
+INSERT INTO `Creneau` (`num`, `date`, `heureDebut`, `salle`, `groupe`, `event`)
+VALUES (6, '2020-11-27', '08:00:00', 'IG5', NULL, 5),
+       (7, '2020-11-27', '08:10:00', 'IG5', 1, 5),
+       (8, '2020-11-27', '08:20:00', 'IG5', NULL, 5),
+       (9, '2020-11-27', '08:30:00', 'IG5', NULL, 5),
+       (10, '2020-11-27', '08:40:00', 'IG5', NULL, 5),
+       (11, '2020-11-27', '08:50:00', 'IG5', NULL, 5),
+       (13, '2021-01-21', '05:16:00', 'D29', NULL, 5);
 
 -- --------------------------------------------------------
 
@@ -55,10 +109,19 @@ CREATE TABLE `Creneau` (
 --
 
 CREATE TABLE `Enseignant` (
-  `id` int(10) NOT NULL,
-  `nom` varchar(20) NOT NULL,
-  `prenom` int(20) NOT NULL
+                              `id`     int(10)     NOT NULL,
+                              `nom`    varchar(20) NOT NULL,
+                              `prenom` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `Enseignant`
+--
+
+INSERT INTO `Enseignant` (`id`, `nom`, `prenom`)
+VALUES (1, 'PALLEJA', 'Nathalie'),
+       (2, 'BELLAHSENE', 'Zohra'),
+       (3, 'COLETTA', 'Remi');
 
 -- --------------------------------------------------------
 
@@ -67,13 +130,22 @@ CREATE TABLE `Enseignant` (
 --
 
 CREATE TABLE `Etudiant` (
-  `num` varchar(20) NOT NULL,
-  `nom` varchar(10) NOT NULL,
-  `prenom` varchar(10) NOT NULL,
-  `mail` varchar(30) NOT NULL,
-  `mdp` text NOT NULL,
-  `promo` varchar(20) NOT NULL
+                            `num`    varchar(20) NOT NULL,
+                            `nom`    varchar(20) NOT NULL,
+                            `prenom` varchar(20) NOT NULL,
+                            `mail`   varchar(70) NOT NULL,
+                            `mdp`    text        NOT NULL,
+                            `promo`  varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `Etudiant`
+--
+
+INSERT INTO `Etudiant` (`num`, `nom`, `prenom`, `mail`, `mdp`, `promo`)
+VALUES ('000000000A', 'Windsor', 'Elizabeth', 'elizabeth.windsor@etu.umontpellier.fr', '123', 'IG3'),
+       ('000000000B', 'PARADIS', 'Adam', 'adam.paradis@etu.umontpellier.fr', '1234', 'IG4'),
+       ('000000000C', 'PARADIS', 'Eve', 'eve.paradis@etu.umontpellier.fr', '1234', 'IG4');
 
 -- --------------------------------------------------------
 
@@ -82,15 +154,22 @@ CREATE TABLE `Etudiant` (
 --
 
 CREATE TABLE `Evenement` (
-  `id` int(10) NOT NULL,
-  `nom` varchar(300) NOT NULL,
-  `dateDebut` date NOT NULL,
-  `dureeEnvent` int(10) NOT NULL,
-  `dateLimiteResa` date NOT NULL,
-  `dureeCreneau` float NOT NULL,
-  `nbJury` int(1) NOT NULL,
-  `promo` varchar(20) NOT NULL
+                             `id`             int(10)      NOT NULL,
+                             `nom`            varchar(300) NOT NULL,
+                             `dateDebut`      date         NOT NULL,
+                             `dureeEvent`     int(10)      NOT NULL,
+                             `dateLimiteResa` date         NOT NULL,
+                             `dureeCreneau`   time         NOT NULL,
+                             `nbJury`         int(1)       NOT NULL,
+                             `promo`          varchar(20)  NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `Evenement`
+--
+
+INSERT INTO `Evenement` (`id`, `nom`, `dateDebut`, `dureeEvent`, `dateLimiteResa`, `dureeCreneau`, `nbJury`, `promo`)
+VALUES (5, 'Stage', '2021-01-01', 3, '2021-01-02', '00:00:01', 2, 'IG3');
 
 -- --------------------------------------------------------
 
@@ -106,6 +185,14 @@ CREATE TABLE `Groupe` (
   `TuteurEnseignant` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `Groupe`
+--
+
+INSERT INTO `Groupe` (`id`, `nomTuteurEntreprise`, `prenomTuteurEntreprise`, `nomEntreprise`, `TuteurEnseignant`)
+VALUES (1, 'DUPUIS', 'Patrick', 'EDF', 1),
+       (2, NULL, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -117,6 +204,14 @@ CREATE TABLE `Participe` (
   `groupe` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `Participe`
+--
+
+INSERT INTO `Participe` (`enseignant`, `groupe`)
+VALUES (1, 1),
+       (3, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -126,6 +221,16 @@ CREATE TABLE `Participe` (
 CREATE TABLE `Promo` (
   `id` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `Promo`
+--
+
+INSERT INTO `Promo` (`id`)
+VALUES ('IG3'),
+       ('IG4'),
+       ('IG5'),
+       ('MAT3');
 
 --
 -- Indexes for dumped tables
@@ -156,7 +261,8 @@ ALTER TABLE `Enseignant`
 -- Indexes for table `Etudiant`
 --
 ALTER TABLE `Etudiant`
-  ADD PRIMARY KEY (`num`);
+    ADD PRIMARY KEY (`num`),
+    ADD KEY `Etudiant_forein_promo` (`promo`);
 
 --
 -- Indexes for table `Evenement`
@@ -194,25 +300,29 @@ ALTER TABLE `Promo`
 -- AUTO_INCREMENT for table `Creneau`
 --
 ALTER TABLE `Creneau`
-  MODIFY `num` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `num` int(11) NOT NULL AUTO_INCREMENT,
+    AUTO_INCREMENT = 14;
 
 --
 -- AUTO_INCREMENT for table `Enseignant`
 --
 ALTER TABLE `Enseignant`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+    MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,
+    AUTO_INCREMENT = 4;
 
 --
 -- AUTO_INCREMENT for table `Evenement`
 --
 ALTER TABLE `Evenement`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+    MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,
+    AUTO_INCREMENT = 6;
 
 --
 -- AUTO_INCREMENT for table `Groupe`
 --
 ALTER TABLE `Groupe`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,
+    AUTO_INCREMENT = 3;
 
 --
 -- Constraints for dumped tables
@@ -231,6 +341,12 @@ ALTER TABLE `Composer`
 ALTER TABLE `Creneau`
   ADD CONSTRAINT `creneau_forrein_event` FOREIGN KEY (`event`) REFERENCES `Evenement` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `creneau_forrein_groupe` FOREIGN KEY (`groupe`) REFERENCES `Groupe` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `Etudiant`
+--
+ALTER TABLE `Etudiant`
+    ADD CONSTRAINT `Etudiant_forein_promo` FOREIGN KEY (`promo`) REFERENCES `Promo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `Groupe`
