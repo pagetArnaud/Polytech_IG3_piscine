@@ -1,10 +1,15 @@
-form {
+.form {
     margin: 0 auto;
     width: 800px;
     border: 1px solid #CCC;
     padding: 1em;
 }
 
+.form-title{
+    margin: 0 auto;
+    width: 800px;
+    padding: 0;
+}
 
 
 .row {

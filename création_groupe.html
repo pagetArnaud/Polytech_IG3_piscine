@@ -32,14 +32,17 @@
 
 <p>connecté en tant qu'étudiant</p>
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <label for="name">Nom du groupe</label>
-        </div>
-        <div class="col">
-            <input type="text" id="name" name="Nom groupe"
-                   size="20" placeholder="Nom groupe">
-        </div>
+    <form action="/nom-groupe" method="post" class="form-title form-group">
+        <div class="row">
+            <div class="col">
+                <label for="name">Nom du groupe</label>
+            </div>
+
+            <div class="col">
+                <input type="text" id="name" name="Nom groupe"
+                       size="20" placeholder="Nom groupe">
+            </div>
+        </form>
     </div>
     <form action="/nom-groupe" method="post" class="form form-group">
         <div class="row">
@@ -47,8 +50,8 @@
                 <label for="name1">Filière</label>
             </div>
             <div class="col-12 col-md-12 col-lg-6 input">
-                <input type="text" id="name1" name="Nom groupe"
-                       size="20" maxlength="3">
+                <input type="text" id="name1" name="Filière"
+                       size="20" maxlength="3" required>
             </div>
         </div>
         <div class="row">
@@ -56,8 +59,8 @@
                 <label for="name2">Numéro élève A</label>
             </div>
             <div class="col-12 col-md-12 col-lg-6 input">
-                <input type="text" id="name2" name="Nom groupe"
-                       size="20" maxlength="8">
+                <input type="text" id="name2" name="num-elev-a"
+                       size="20" maxlength="8" required>
             </div>
         </div>
         <div class="row">
@@ -65,8 +68,8 @@
                 <label for="name3">Numéro élève B</label>
             </div>
             <div class="col-12 col-md-12 col-lg-6 input">
-                <input type="text" id="name3" name="Nom groupe"
-                       size="20" maxlength="8">
+                <input type="text" id="name3" name="num-elev-b"
+                       size="20" maxlength="8" required>
             </div>
         </div>
         <div class="row">
@@ -74,8 +77,8 @@
                 <label for="name4">Nom tuteur</label>
             </div>
             <div class="col-12 col-md-12 col-lg-6 input" >
-                <input type="text" id="name4" name="Nom groupe"
-                       size="20">
+                <input type="text" id="name4" name="Nom tuteur"
+                       size="20" required>
             </div>
         </div>
         <div class="row">
@@ -83,8 +86,8 @@
                 <label for="name5">Prénom tuteur</label>
             </div>
             <div class="col-12 col-md-12 col-lg-6 input">
-                <input type="text" id="name5" name="Nom groupe"
-                       size="20">
+                <input type="text" id="name5" name="prénom tuteur"
+                       size="20" required>
             </div>
         </div>
         <div class="row">
@@ -92,8 +95,8 @@
                 <label for="name6">Entreprise tuteur</label>
             </div>
             <div class="col-12 col-md-12 col-lg-6 input">
-                <input type="text" id="name6" name="Nom groupe"
-                       size="20">
+                <input type="text" id="name6" name="entreprise tut"
+                       size="20" required>
             </div>
         </div>
         <div class="button">
