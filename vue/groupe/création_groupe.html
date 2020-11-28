@@ -1,0 +1,132 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+
+
+
+    <!-- Required meta tags -->
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+
+    <link type="text/css" rel="stylesheet" href="../../css/création_groupe.css">
+
+
+    <title>Création groupe (étudiant)</title>
+
+</head>
+
+<body>
+
+<p>connecté en tant qu'étudiant</p>
+<div class="container">
+    <form action="/nom-groupe" method="post" class="form-title form-group">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-6">
+                <label for="name">Nom du groupe</label>
+            </div>
+
+            <div class="col-12 col-md-12 col-lg-6">
+                <input type="text" id="name" name="Nom groupe"
+                       size="20" placeholder="Nom groupe" class="form-control">
+            </div>
+        </div>
+    </form>
+
+    <form action="/nom-groupe" method="post" class="form form-group">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-6 label">
+                <label for="name1">Filière</label>
+            </div>
+            <div class="col-12 col-md-12 col-lg-6 input">
+                <input type="text" id="name1" name="Filière"
+                       size="20" maxlength="3" required class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-6 label">
+                <label for="name2">Numéro élève A</label>
+            </div>
+            <div class="col-12 col-md-12 col-lg-6 input">
+                <input type="text" id="name2" name="num-elev-a"
+                       size="20" maxlength="8" required class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-6 label">
+                <label for="name3">Numéro élève B</label>
+            </div>
+            <div class="col-12 col-md-12 col-lg-6 input">
+                <input type="text" id="name3" name="num-elev-b"
+                       size="20" maxlength="8" required class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-6 label checkbox">
+                <label for="name4">Nom tuteur</label>
+            </div>
+            <div class="col-12 col-md-12 col-lg-6 input" >
+                <input type="text" id="name4" name="Nom tuteur"
+                       size="20" required class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-6 label">
+                <label for="name5">Prénom tuteur</label>
+            </div>
+            <div class="col-12 col-md-12 col-lg-6 input">
+                <input type="text" id="name5" name="prénom tuteur"
+                       size="20" required class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-6 label">
+                <label for="name6">Entreprise tuteur</label>
+            </div>
+            <div class="col-12 col-md-12 col-lg-6 input">
+                <input type="text" id="name6" name="entreprise tut"
+                       size="20" required class="form-control">
+            </div>
+        </div>
+        <div class="button">
+            <button class="btn btn-light" type="submit">Créer le groupe</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+<!-- Optional JavaScript -->
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
+
