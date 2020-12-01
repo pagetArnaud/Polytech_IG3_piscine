@@ -1,0 +1,19 @@
+th {
+    border: 1px solid #CCC;
+    text-align: center;
+}
+
+td {
+    border: 1px solid #CCC;
+    text-align: center;
+}
+
+.head {
+    border: 2px solid #CCC;
+}
+
+input {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 100px;
+}
