@@ -16,6 +16,19 @@ function getcreneau(num) {
     );
     });
 }
+
+function getCreneauEtu(numetu) {
+    return new Promise((resolve, reject) => {
+        bd.query('SELECT * FROM Creneau c JOIN Composer com on c.groupe=com.groupe WHERE com.etudiant=?', [numetu],
+            function (err, result) {
+                if (err) {
+                    reject(err);
+                }
+                resolve(result);
+            });
+    });
+}
+
 function getAllcreneau() {
     return new Promise((resolve, reject) => {
         bd.query ('SELECT * FROM Creneau',
@@ -29,4 +42,4 @@ function getAllcreneau() {
 }
 
 
-module.exports={getAllcreneau,getcreneau};
+module.exports = {getAllcreneau, getcreneau, getCreneauEtu};
