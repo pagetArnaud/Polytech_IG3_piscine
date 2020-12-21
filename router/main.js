@@ -4,6 +4,7 @@ var http = require('http').Server(app);
 var fs = require('fs');
 var etu=require(path.join(__dirname,"etu"));
 var admin=require(path.join(__dirname,"admin"));
+const PORT = process.env.PORT || 5000;
 
 function buildFile(req, res, chemin) {
     fs.readFile(path.join(__dirname, "../vue/commun/head.html"), function (err, head) {
@@ -38,6 +39,7 @@ app.get("/", function (req, res) {
 
 });
 app.set('view engine', 'ejs');//pour utliser le moteur de view EJS
+app.set('views', path.join(__dirname, '/../vue'));
 
 
 //Fonction personnel
@@ -56,6 +58,6 @@ app.use(function (req, res) {
 
 });
 
-http.listen(process.env.PORT, function () {
-    console.log('Listening  ')
+http.listen(PORT, function () {
+    console.log('Listening  ' + PORT)
 });

@@ -4,6 +4,10 @@ var model_etudiant = require('../model/etudiant');
 var model_creneau = require('../model/creneau');
 var fs = require('fs');
 var groupe = require(path.join(__dirname, "groupe"));
+var bodyParser = require('body-parser')
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var registration = require('../controller/registration');
+
 
 function buildFile(req, res, chemin) {
     fs.readFile(path.join(__dirname, "../vue/commun/head.html"), function (err, head) {
@@ -38,7 +42,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/register', function (req, res) {
-    buildFile(req, res, path.join(__dirname, "../vue/connexion/register.html"));
+    buildFile(req, res, path.join(__dirname, "../vue/connexion/register.ejs"));
 
 });
 
@@ -63,6 +67,6 @@ router.get('/creneau/read', function (req, res) {
     );
 
 });
-
+router.post('/register',urlencodedParser, registration.renderSuccess);
 
 module.exports = router;
