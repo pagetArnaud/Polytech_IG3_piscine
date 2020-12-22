@@ -11,41 +11,25 @@
     </tr>
     </thead>
     <tbody id="listeCreneau">
+    <% creneau.forEach(function(row) { %>
+        <% var date = new Date(row.date); %>
+        <tr>
+            <td><%= date.getDate() %>/<%= date.getMonth() + 1 %>/<%= date.getFullYear() %></td>
+            <td><%= row.heureDebut %></td>
+            <td><%= row.salle %></td>
+            <td>
+                <% if(row.groupe){ %>
+                    <%= row.groupe %>
+                <% } else{ %> non definit
+                <% } %>
+            </td>
+        </tr>
 
+    <% }); %>
     </tbody>
 </table>
 <a class="btn btn-primary" href="#" role="button">Modifier</a>
 
 </body>
-<script>
-    element=0;
 
-    function callback(contenu) {
-
-        for (var i=0; i<contenu.length; i++){
-            var tr=document.createElement("tr");
-            element=contenu[i];
-            var date=new Date(element.date);
-
-            tr.innerHTML=`
-                          <td>${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}</td>
-                          <td>${element.heureDebut}</td>
-                          <td>${element.salle}</td>
-                          <td>${element.groupe ? element.groupe : "non attribué"}</td>`;
-            document.getElementById("listeCreneau").appendChild(tr);
-        }
-    }
-
-    function getCreneau() {
-        let url = "creneau/read";
-        let requete = new XMLHttpRequest();
-        requete.open("GET", url, true);
-        requete.addEventListener("load", function () {
-            callback(JSON.parse(requete.responseText));
-        });
-        requete.send(null);
-    }
-
-    getCreneau();
-</script>
 <%- include('../commun/footer'); %>

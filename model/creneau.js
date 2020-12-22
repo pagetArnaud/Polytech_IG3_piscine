@@ -41,5 +41,18 @@ function getAllcreneau() {
     });
 }
 
+function getCreneauDispo() {
+    //Donne la liste des créneaux disponible (= qui ne sont pas reservé par un groupe)
+    return new Promise((resolve, reject) => {
+        bd.query('SELECT * FROM Creneau WHERE groupe is NULL ',
+            function (err, result) {
+                if (err) {
+                    reject(err);
+                }
+                resolve(result);
+            });
+    });
+}
 
-module.exports = {getAllcreneau, getcreneau, getCreneauEtu};
+
+module.exports = {getAllcreneau, getcreneau, getCreneauEtu, getCreneauDispo};

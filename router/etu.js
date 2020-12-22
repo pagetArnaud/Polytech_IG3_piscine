@@ -1,9 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var model_etudiant = require('../model/etudiant');
-var model_creneau = require('../model/creneau');
 var controller_etu = require('../controller/etudiants');
-var fs = require('fs');
+
 var groupe = require(path.join(__dirname, "groupe"));
 var bodyParser = require('body-parser')
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -28,7 +26,7 @@ router.use('/groupe', groupe);
 
 
 router.get('/creneau', function (req, res) {
-    controller_etu.get_creneau(res, req)
+    controller_etu.get_creneau(req, res)
 
 });
 
