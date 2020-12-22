@@ -6,7 +6,7 @@ var fs = require('fs');
 
 
 function buildFile(req, res, chemin) {
-    fs.readFile(path.join(__dirname, "../vue/commun/head.html"), function (err, head) {
+    fs.readFile(path.join(__dirname, "../vue/commun/head.ejs"), function (err, head) {
         if (err) {
             console.log(err);
             res.status(404).send('Page introuvable !!!! ');
@@ -16,7 +16,7 @@ function buildFile(req, res, chemin) {
                     console.log(err);
                     res.status(404).send('Page introuvable !!!! ');
                 } else {
-                    fs.readFile(path.join(__dirname, "../vue/commun/footer.html"), function (err, footer) {
+                    fs.readFile(path.join(__dirname, "../vue/commun/footer.ejs"), function (err, footer) {
                         if (err) {
                             console.log(err);
                             res.status(404).send('Page introuvable !!!! ');
@@ -33,8 +33,8 @@ function buildFile(req, res, chemin) {
 
 // Home page route.
 router.get('/', function (req, res) {
-    buildFile(res, res, path.join(__dirname, "../vue/connexion/login.html"));
-    // res.sendFile(path.join(__dirname, "../vue/connexion/login.html"));
+    buildFile(res, res, path.join(__dirname, "../vue/connexion/login.ejs"));
+    // res.sendFile(path.join(__dirname, "../vue/connexion/login.ejs"));
 });
 
 // About page route.
@@ -43,13 +43,13 @@ router.get('/groupe', function (req, res) {
 });
 
 router.get('/evenement', function (req, res) {
-    buildFile(req, res, path.join(__dirname, "../vue/evenement/create.html"));
-    //res.sendFile(path.join(__dirname, "../vue/evenement/create.html"));
+    buildFile(req, res, path.join(__dirname, "../vue/evenement/create.ejs"));
+    //res.sendFile(path.join(__dirname, "../vue/evenement/create.ejs"));
 });
 
 
 router.get('/creneau', function (req, res) {
-    buildFile(req, res, path.join(__dirname, "../vue/creneau/selection.html"));
+    buildFile(req, res, path.join(__dirname, "../vue/creneau/selection.ejs"));
 });
 
 router.get('/creneau/read', function (req, res) {

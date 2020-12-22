@@ -4,9 +4,17 @@ var model_etudiant = require('../model/etudiant');
 var model_creneau = require('../model/creneau');
 var fs = require('fs');
 var groupe = require(path.join(__dirname, "groupe"));
+var bodyParser = require('body-parser')
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var registration = require('../controller/registration');
+router.use(urlencodedParser)
+router.use(express.json())
+const {check, validationResult} = require('express-validator');
+
+
 
 function buildFile(req, res, chemin) {
-    fs.readFile(path.join(__dirname, "../vue/commun/head.html"), function (err, head) {
+    fs.readFile(path.join(__dirname, "../vue/commun/head.ejs"), function (err, head) {
         if (err) {
             console.log(err);
             res.status(404).send('Page introuvable !!!! ');
@@ -16,7 +24,7 @@ function buildFile(req, res, chemin) {
                     console.log(err);
                     res.status(404).send('Page introuvable !!!! ');
                 } else {
-                    fs.readFile(path.join(__dirname, "../vue/commun/footer.html"), function (err, footer) {
+                    fs.readFile(path.join(__dirname, "../vue/commun/footer.ejs"), function (err, footer) {
                         if (err) {
                             console.log(err);
                             res.status(404).send('Page introuvable !!!! ');
@@ -33,12 +41,12 @@ function buildFile(req, res, chemin) {
 
 // Home page route.
 router.get('/', function (req, res) {
-    buildFile(req, res, path.join(__dirname, "../vue/connexion/login.html"));
+    buildFile(req, res, path.join(__dirname, "../vue/connexion/login.ejs"));
 
 });
 
 router.get('/register', function (req, res) {
-    buildFile(req, res, path.join(__dirname, "../vue/connexion/register.html"));
+    buildFile(req, res, path.join(__dirname, "../vue/connexion/register.ejs"));
 
 });
 
@@ -47,7 +55,7 @@ router.use('/groupe', groupe);
 
 router.get('/creneau',
     function (req, res) {
-        buildFile(req, res, path.join(__dirname, "../vue/creneau/selection.html"))
+        buildFile(req, res, path.join(__dirname, "../vue/creneau/selection.ejs"))
 });
 
 router.get('/creneau/read', function (req, res) {
@@ -64,5 +72,6 @@ router.get('/creneau/read', function (req, res) {
 
 });
 
+router.post('/register', registration.checkDataIsValidAndSanitize, registration.checkCorrectness, registration.correctForm);
 
 module.exports = router;
