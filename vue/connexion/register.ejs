@@ -1,3 +1,13 @@
+<% if(typeof error != 'undefined') { %>
+    <% error.forEach(function(er) { %>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <%= er.msg %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    <% }) %>
+<% } %>
 <div class="register-photo">
         <div class="form-container">
             <div class="image-holder"></div>

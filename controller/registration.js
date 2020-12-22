@@ -44,7 +44,7 @@ exports.checkCorrectness = function (req, res, next) {
 
     if (hasError) {
         console.log(error);
-        res.render('connexion/registrationsuccessful', error)
+        res.render('connexion/register', error)
     } else {
         next();
     }
