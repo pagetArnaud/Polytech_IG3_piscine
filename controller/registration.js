@@ -68,8 +68,10 @@ exports.correctForm = function (req, res) {
             });
         });
 
-
-    etudiant.addEtudiant(num, name, firstname, email, password, "IG3")
+    bcrypt.compare(data.password, "$2a$10$Vc2h3PmIUXCI1JgV/aSoteIyLZk5KUcIR673MFD9hn.gS.z9cHEbK", function(err, result) {
+        console.log(true)
+    });
+    //etudiant.addEtudiant(num, name, firstname, email, password, "IG3")
     res.render('connexion/registrationsuccessful', {data : req.body})
 }
 
