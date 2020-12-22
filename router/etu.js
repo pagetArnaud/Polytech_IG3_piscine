@@ -9,7 +9,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var registration = require('../controller/registration');
 router.use(urlencodedParser)
 router.use(express.json())
-const {check, validationResult} = require('express-validator/check');
+const {check, validationResult} = require('express-validator');
 
 
 
@@ -72,55 +72,6 @@ router.get('/creneau/read', function (req, res) {
 
 });
 
-router.post(
-    '/register',
-    [
-        check("firstname")
-            .isLength({ min: 3 })
-            .withMessage("Le prénom doit avoir au moins 3 lettres.")
-            .trim(),
-        check("name")
-            .isLength({ min: 3 })
-            .withMessage("Le nom doit avoir au moins 3 lettres.")
-            .trim(),
-        check("name")
-            .isLength({ min: 3 })
-            .withMessage("Le nom doit avoir au moins 3 lettres.")
-            .trim(),
+router.post('/register', registration.checkDataIsValidAndSanitize, registration.checkCorrectness, registration.correctForm);
 
-        check("email")
-            .isEmail()
-            .withMessage("Email invalide")
-            .normalizeEmail(),
-
-        check("password")
-            .isLength({ min: 6, max: 15 })
-            .withMessage("Merci d'entrer un mot de passe entre 6 et 15 caractères."),
-
-
-        check("password2").custom((value, { req }) => {
-            if (value !== req.body.password) {
-                console.log(req.body.password, req.body.confirmPassword);
-                throw new Error("Les mots de passe ne correspondent pas.");
-            }
-            return true;
-        }),
-    ],
-    (req, res, next) => {
-        const error = validationResult(req).formatWith(({ msg }) => msg);
-
-        const hasError = !error.isEmpty();
-
-        if (hasError) {
-            console.log(error);
-            res.render('connexion/registrationsuccessful', error)
-        } else {
-            next();
-        }
-    },
-    registration.renderSuccess
-);
-
-
-router.post('/')
 module.exports = router;
