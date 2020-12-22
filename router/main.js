@@ -7,7 +7,7 @@ var admin=require(path.join(__dirname,"admin"));
 const PORT = process.env.PORT || 5000;
 
 function buildFile(req, res, chemin) {
-    fs.readFile(path.join(__dirname, "../vue/commun/head.html"), function (err, head) {
+    fs.readFile(path.join(__dirname, "../vue/commun/head.ejs"), function (err, head) {
         if (err) {
             console.log(err);
             res.status(404).send('Page introuvable !!!! ');
@@ -17,7 +17,7 @@ function buildFile(req, res, chemin) {
                     console.log(err);
                     res.status(404).send('Page introuvable !!!! ');
                 } else {
-                    fs.readFile(path.join(__dirname, "../vue/commun/footer.html"), function (err, footer) {
+                    fs.readFile(path.join(__dirname, "../vue/commun/footer.ejs"), function (err, footer) {
                         if (err) {
                             console.log(err);
                             res.status(404).send('Page introuvable !!!! ');
@@ -34,8 +34,8 @@ function buildFile(req, res, chemin) {
 
 
 app.get("/", function (req, res) {
-    buildFile(req, res, path.join(__dirname, "../vue/connexion/index.html"));
-    //res.sendFile(path.join(__dirname,"../vue/connexion/index.html"));
+    buildFile(req, res, path.join(__dirname, "../vue/connexion/index.ejs"));
+    //res.sendFile(path.join(__dirname,"../vue/connexion/index.ejs"));
 
 });
 app.set('view engine', 'ejs');//pour utliser le moteur de view EJS
