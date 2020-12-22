@@ -1,3 +1,5 @@
+<%- include('../commun/head'); %>
+
 <body>
 <table class="table">
     <thead>
@@ -12,14 +14,15 @@
 
     </tbody>
 </table>
-    <a class="btn btn-primary" href="#" role="button">Modifier</a>
+<a class="btn btn-primary" href="#" role="button">Modifier</a>
 
 </body>
 <script>
     element=0;
+
     function callback(contenu) {
 
-        for (var i=0;i<contenu.length;i++){
+        for (var i=0; i<contenu.length; i++){
             var tr=document.createElement("tr");
             element=contenu[i];
             var date=new Date(element.date);
@@ -42,5 +45,7 @@
         });
         requete.send(null);
     }
+
     getCreneau();
 </script>
+<%- include('../commun/footer'); %>
