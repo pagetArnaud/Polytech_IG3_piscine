@@ -2,20 +2,52 @@ var express = require('express');
 var router = express.Router();
 var model_etudiant = require('../model/etudiant');
 var model_creneau = require('../model/creneau');
+var fs = require('fs');
+var groupe = require(path.join(__dirname, "groupe"));
 
+function buildFile(req, res, chemin) {
+    fs.readFile(path.join(__dirname, "../vue/commun/head.html"), function (err, head) {
+        if (err) {
+            console.log(err);
+            res.status(404).send('Page introuvable !!!! ');
+        } else {
+            fs.readFile(chemin, function (err, data) {
+                if (err) {
+                    console.log(err);
+                    res.status(404).send('Page introuvable !!!! ');
+                } else {
+                    fs.readFile(path.join(__dirname, "../vue/commun/footer.html"), function (err, footer) {
+                        if (err) {
+                            console.log(err);
+                            res.status(404).send('Page introuvable !!!! ');
+                        } else {
+                            ouput = head.toString().concat(data.toString(), footer.toString());
+                            res.send(ouput);
+                        }
+                    })
+                }
+            });
+        }
+    });
+}
 
 // Home page route.
 router.get('/', function (req, res) {
-    res.send('etu home page');
+    buildFile(req, res, path.join(__dirname, "../vue/connexion/login.html"));
+
+});
+
+router.get('/register', function (req, res) {
+    buildFile(req, res, path.join(__dirname, "../vue/connexion/register.html"));
+
 });
 
 // About page route.
-router.get('/groupe', function (req, res) {
-    res.send('etu page groupe');
-});
+router.use('/groupe', groupe);
 
-router.get('/creneau', function (req, res) {
-    res.sendfile(path.join(__dirname, "../vue/creneau/selection.html"));
+router.get('/creneau',
+    function (req, res) {
+        buildFile(req, res, path.join(__dirname, "../vue/creneau/selection.html"))
 });
 
 router.get('/creneau/read', function (req, res) {
@@ -32,8 +64,5 @@ router.get('/creneau/read', function (req, res) {
 
 });
 
-router.get('/groupe', function (req, res) {
-    res.send('etu page groupe');
-});
 
 module.exports = router;
