@@ -14,6 +14,7 @@ exports.checkDataIsValidAndSanitize = [
         .isLength({ min: 3 })
         .withMessage("Le nom doit avoir au moins 3 lettres.")
         .trim(),
+    //TODO: verif num étudiant
     check("name")
         .isLength({ min: 3 })
         .withMessage("Le nom doit avoir au moins 3 lettres.")
@@ -44,34 +45,31 @@ exports.checkCorrectness = function (req, res, next) {
 
     if (hasError) {
         console.log(error);
-        res.render('connexion/registrationsuccessful', error)
+        res.render('connexion/register', {error : error.errors})
     } else {
         next();
     }
 }
 exports.correctForm = function (req, res) {
-    console.log(req.body)
+    //console.log(req.body)
     data = req.body
     name = data.name
     firstname = data.firstname
     email = data.email
     password = data.password
     num = data.studNo
-    console.log(name, firstname, email, password, num)
-    bcrypt.genSalt(10, function(err, salt){
-        bcrypt.hash(password, salt, function(err, hash){
-            if(err){
-                console.log(err);
-            }
-            password = hash;
-            console.log(password)
-            });
-        });
-
-    bcrypt.compare(data.password, "$2a$10$Vc2h3PmIUXCI1JgV/aSoteIyLZk5KUcIR673MFD9hn.gS.z9cHEbK", function(err, result) {
-        console.log(true)
-    });
-    //etudiant.addEtudiant(num, name, firstname, email, password, "IG3")
-    res.render('connexion/registrationsuccessful', {data : req.body})
+    //TODO : OBTENIR LA PROMO
+    //cryptage du mdp
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(password, salt);
+    console.log(hash)
+    prom = etudiant.addEtudiant(num, name, firstname, email, hash, "IG3")
+    prom.then(() => {
+        //TODO : renvoyer vers la page d'accueil des étudiants avec un message disant que l'inscription s'est bien déroulée
+        res.render('menu/index')
+    }).catch(() => {
+        //Si l'étudiant est déjà inscrit
+        res.render('connexion/login', {alreadyRegistered : true})
+    })
 }
 
