@@ -1,10 +1,5 @@
 <%- include('../commun/head'); %>
-<p>
-    <% data.forEach(function (user) {
-        user
-    }); %>
 
-</p>
 <body>
 <table>
     <thead>
@@ -18,20 +13,21 @@
     </tr>
     <tbody>
     <tr>
-        <td><button name="button">P1811421</button></td>
-        <td><button name="button">sofia</button></td>
-        <td><button name="button">bouaklayene</button></td>
-        <td><input type="date" id="start" name="trip-start"
-                   value="2018-07-22"
-                   min="2018-01-01" max="2018-12-31"></td>
-        <td><select id="monselect">
-                <option value="valeur1">Salle 1</option>
-                <option value="valeur2" selected>Salle 2</option>
-                <option value="valeur3">Salle 3</option>
-            </select>
+        <td>
+            <button name="button">P1811421</button>
         </td>
-        <td><input type="time" id="appt" name="appt"
-                   min="09:00" max="18:00" required></td>
+        <td>
+            <button name="button">sofia</button>
+        </td>
+        <td>
+            <button name="button">bouaklayene</button>
+        </td>
+        <% if(data){ %>
+            <% var date = new Date(data.date); %>
+            <td><%= date.getDate() %>/<%= date.getMonth() + 1 %>/<%= date.getFullYear() %></td>
+            <td><%= data.salle %></td>
+            <td><%= data.heureDebut %></td>
+        <% } %>
     </tr>
     </tbody>
 

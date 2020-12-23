@@ -1,7 +1,7 @@
 var model_etudiant = require('../model/etudiant');
 var model_creneau = require('../model/creneau');
 
-
+var idEtu = "000000000A" //on simule le login
 function login(req, res) {
     res.render("connexion/login", {alreadyRegistered : false, loginFailed : false})
 }
@@ -12,12 +12,11 @@ function register(req, res) {
 
 
 function get_creneau(req, res) {
-    var prom = model_creneau.getAllcreneau();
+    var prom = model_creneau.getCreneauEtu(idEtu);
 
     prom.then((value) => {
         //console.log(value);
-        console.log(res)
-        res.render("creneau/consultationCreneau", {data: value});
+        res.render("creneau/consultationCreneau", {data: value[0]});
 
     }).catch((error) => {
 
