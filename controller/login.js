@@ -1,10 +1,12 @@
-const etudiant = require("../model/etudiant")
+const et = require("../model/etudiant")
 var expV = require("express-validator")
 var bcrypt = require("bcryptjs")
 const {check, validationResult} = require('express-validator')
 const promo = require ("../model/promo")
 //promo.addPromo("IG3")
-function CheckPW (hash, passwordToCheck) {
+var auth = require("../lib/auth");
+
+function CheckPW(passwordToCheck, hash) {
     return new Promise((resolve, reject) => {
         bcrypt.compare(passwordToCheck, hash, (err, isMatch) => {
             if (err) reject(err);
@@ -24,13 +26,18 @@ exports.login = (req, res, next) => {
     const mdp = req.body.password
     const pMailExists = et.getEtudiantMail(mail)
 
-    pMailExists.then((result) => {
-        console.log(result[0].mdp)
-        const pPassMatches = CheckPW(result[0].mdp, mdp)
-        pPassMatches.then((result) => {
-            console.log(result)
+    pMailExists.then((result) => { //Si le mail est dans la bd
+        console.log(result[0].mdp);
+        const pPassMatches = CheckPW(mdp, result[0].mdp);
+        pPassMatches.then((resultat) => {//Si les mdp sont identique
+            console.log(resultat);
+            var row = result[0];
+            var token = auth.cree(row.num, row.nom, row.prenom, false);
+            res.cookie("session", token);
+
             res.render('menu/index')
-            //TODO: SESSION
+
+
         }).catch((err) => {
             console.log(err)
             res.render('connexion/login', {alreadyRegistered : false, loginFailed : true})
