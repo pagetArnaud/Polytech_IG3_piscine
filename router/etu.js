@@ -8,13 +8,15 @@ var groupe = require(path.join(__dirname, "groupe"));
 var bodyParser = require('body-parser')
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var registration = require('../controller/registration');
+var login = require('../controller/login');
 router.use(urlencodedParser)
 router.use(express.json())
 const {check, validationResult} = require('express-validator');
+//TODO: enlever les require inutiles
 
 
 // Home page route.
-router.get('/', function (req, res) {
+router.get('/login', function (req, res) {
     controller_etu.login(req, res);
 });
 
@@ -31,7 +33,9 @@ router.get('/creneau', function (req, res) {
     controller_etu.get_creneau(res, req)
 
 });
-
+//registration
 router.post('/register', registration.checkDataIsValidAndSanitize, registration.checkCorrectness, registration.correctForm);
 
+//Login
+router.post('/login',login.login)
 module.exports = router;

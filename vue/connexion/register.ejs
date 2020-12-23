@@ -1,3 +1,4 @@
+<%- include('../commun/head'); %>
 <% if(typeof error != 'undefined') { %>
     <% error.forEach(function(er) { %>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -8,6 +9,7 @@
         </div>
     <% }) %>
 <% } %>
+
 <div class="register-photo">
         <div class="form-container">
             <div class="image-holder"></div>
@@ -35,3 +37,4 @@
             </form>
         </div>
     </div>
+<%- include('../commun/footer'); %>

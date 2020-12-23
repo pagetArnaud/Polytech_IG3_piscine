@@ -1,4 +1,20 @@
-
+<%- include('../commun/head'); %>
+<% if (alreadyRegistered){ %>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        Vous êtes déjà inscrit, merci de vous connecter.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+<%}%>
+<% if (loginFailed){ %>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        L'authentification a échoué. Merci de vérifier votre adresse e-mail et votre mot de passe.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+<%}%>
 <body>
     <div class="login-clean">
         <form method="post">
@@ -10,10 +26,10 @@
             </div>
             <a class="forgot" href="#">Mot de passe oublié ?</a>
             <div class="dropdown-divider"></div>
-            <a class="btn btn-primary float-none" role="button" id="create-acc" href="etu/register"
+            <a class="btn btn-primary float-none" role="button" id="create-acc" href="/etu/register"
                style="position: relative;width: 240px;background: rgb(188,177,179);text-align: center;margin-right: 0px;margin-left: 0px;">Créer
                 un compte</a>
         </form>
     </div>
-
 </body>
+<%- include('../commun/footer'); %>

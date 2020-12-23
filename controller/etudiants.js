@@ -3,7 +3,7 @@ var model_creneau = require('../model/creneau');
 
 
 function login(req, res) {
-    res.render("connexion/login")
+    res.render("connexion/login", {alreadyRegistered : false, loginFailed : false})
 }
 
 function register(req, res) {
