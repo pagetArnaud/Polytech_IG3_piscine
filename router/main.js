@@ -4,6 +4,12 @@ var http = require('http').Server(app);
 var fs = require('fs');
 var etu=require(path.join(__dirname,"etu"));
 var admin=require(path.join(__dirname,"admin"));
+var bodyParser = require("body-parser");
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({ extended: true}));
 
 app.get("/", function (req, res) {
     res.setHeader('Content-Type', 'text/plain');
@@ -27,6 +33,7 @@ app.use(function (req, res) {
 
 });
 
-http.listen(process.env.PORT, function () {
+
+http.listen(3000, function () {
     console.log('Listening  ')
 });

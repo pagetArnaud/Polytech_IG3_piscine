@@ -3,9 +3,11 @@ var bd= require(path.join(__dirname,"../lib/conf"));
 var util=require("../lib/util");
 //Evenement
 
+
+
 function addEvenement(nom,dateDebut,dureeEvent,dateLimiteResa,dureeCreneau,nbJury,promo) {
     return new Promise((resolve, reject) => {
-        bd.query ('INSERT INTO Evenement (nom,dateDebut,dureeEvent,dateLimiteResa,dureeCreneau,nbJury,promo) VALUES (?,CAST(FROM_UNIXTIME(?) as date),?,CAST(FROM_UNIXTIME(?) as date),?,?,?)',
+        bd.query ('INSERT INTO evenement (nom,dateDebut,dureeEvent,dateLimiteResa,dureeCreneau,nbJury,promo) VALUES (?,CAST(FROM_UNIXTIME(?) as date),?,CAST(FROM_UNIXTIME(?) as date),?,?,?)',
         [nom,util.datetoSQL(dateDebut),dureeEvent,util.datetoSQL(dateLimiteResa),dureeCreneau,nbJury,promo],
             function(err, result){
                 if (err){
@@ -17,11 +19,11 @@ function addEvenement(nom,dateDebut,dureeEvent,dateLimiteResa,dureeCreneau,nbJur
     });
 }
 
-function getEvenement(num) {
+function getEvenement(id) {
     return new Promise((resolve, reject) => {
 
-    bd.query ('SELECT * FROM Evenement WHERE num=?',
-        [num],
+    bd.query ('SELECT * FROM evenement WHERE id=?',
+        [id],
         function(err, result){
             if (err){
                 reject(err);
@@ -34,7 +36,7 @@ function getEvenement(num) {
 function getAllEvenement() {
     return new Promise((resolve, reject) => {
 
-        bd.query ('SELECT * FROM Evenement',
+        bd.query ('SELECT * FROM evenement',
             function(err, result){
                 if (err){
                     reject(err);
