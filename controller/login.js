@@ -32,6 +32,8 @@ exports.login = (req, res, next) => {
         pPassMatches.then((resultat) => {//Si les mdp sont identique
             console.log(resultat);
             var row = result[0];
+            //TODO si c'est un admin changer isAdmin
+
             var token = auth.cree(row.num, row.nom, row.prenom, false);
             res.cookie("session", token);
 
