@@ -7,11 +7,11 @@ const promo = require ("../model/promo")
 function CheckPW (hash, passwordToCheck) {
     return new Promise((resolve, reject) => {
         bcrypt.compare(passwordToCheck, hash, (err, isMatch) => {
-            if (err) throw err;
+            if (err) reject(err);
             if (isMatch) {
-                resolve()
+                resolve('Mot de passe correct')
             } else {
-                reject()
+                reject('Les mots de passes de correspondent pas')
             }
 
         })
@@ -28,11 +28,11 @@ exports.login = (req, res, next) => {
         console.log(result[0].mdp)
         const pPassMatches = CheckPW(result[0].mdp, mdp)
         pPassMatches.then((result) => {
-            console.log("succesful login")
+            console.log(result)
             res.render('menu/index')
             //TODO: SESSION
         }).catch((err) => {
-            console.log("wrong password")
+            console.log(err)
             res.render('connexion/login', {alreadyRegistered : false, loginFailed : true})
         })
     }).catch((err) => {
