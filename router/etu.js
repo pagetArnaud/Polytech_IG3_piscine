@@ -9,7 +9,8 @@ const {check, validationResult} = require('express-validator');
 var auth = require("../lib/auth");
 
 router.use(function (req, res, next) {
-    var prom = auth.getTokenCookie()
+    var cookie = req.cookies["session"];
+    var prom = auth.getTokenCookie(cookie)
     prom.then((token) => {
         req.token = token; //On passe le token au prochain middleware si il est bien décrypté
         next()

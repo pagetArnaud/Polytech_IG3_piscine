@@ -35,6 +35,7 @@ exports.login = (req, res, next) => {
             var row = resultat[0];
             var token = admins.includes(row.num) ? auth.cree(row.num, row.nom, row.prenom, true) : auth.cree(row.num, row.nom, row.prenom, false);
             res.cookie("session", token);
+            //TODO redirect plutot que render ?
             res.render('menu/index')
 
 

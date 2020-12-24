@@ -6,12 +6,14 @@ var etu=require(path.join(__dirname,"etu"));
 var admin=require(path.join(__dirname,"admin"));
 const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 5000;
-
 var controller_etu = require('../controller/etudiants');
 var jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 var registration = require('../controller/registration');
 var login = require('../controller/login');
+//TODO retirer les require inutiles
+//TODO faire en sorte qu'on ne puisse pas accéder aux pages de login une fois connecté -> rediriger vers le menu admin ou etu
+//TODO combien de temps dure le token? Faut il créer une expiration et le rafraichir ?
 
 app.set('view engine', 'ejs');//pour utliser le moteur de view EJS
 app.set('views', path.join(__dirname, '/../vue'));
