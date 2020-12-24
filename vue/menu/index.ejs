@@ -1,4 +1,9 @@
 <%- include('../commun/head'); %>
+<% if (typeof Registration != 'undefined' ){%>
+    <div class="alert alert-success" role="alert">
+        L'inscription s'est déroulée avec succès.
+    </div>
+<%}%>
 <body>
     <div class="jumbotron text-center" style="margin: 34px;">
         <h1 class="text-left" style="font-size: 31px;text-align: center;">Espace étudiant</h1>

@@ -9,27 +9,21 @@ const {check, validationResult} = require('express-validator');
 var auth = require("../lib/auth");
 
 router.use(function (req, res, next) {
-    var cookie = req.cookies["session"];
-    if (cookie) {//Si le cookies existe
-        token = auth.decrypte(cookie);
-        if (token !== false) {//Si c'est bien le token de session et qu'on peut le decrypter
-            req.token = token;//On passe le token au prochain middleware
-            next()
-        } else {//Si on ne peut pas le decripter, on demande de se re-login
-            res.redirect("../login")
-        }
-    } else {//Si le cookie n'existe pas, on se login
-        res.redirect("../login")
-    }
+    var prom = auth.getTokenCookie()
+    prom.then((token) => {
+        req.token = token; //On passe le token au prochain middleware si il est bien décrypté
+        next()
+    }).catch((msg) => { //Si on ne peut pas decripter le token ou si le cookie n'existe pas, on demande de se re-login
+        console.log(msg)
+        res.redirect('../login')
+    })
 });
-
 
 // About page route.
 router.use('/groupe', groupe);
 
 router.get('/creneau', function (req, res) {
     controller_etu.get_creneau(req, res)
-
 });
 
 
