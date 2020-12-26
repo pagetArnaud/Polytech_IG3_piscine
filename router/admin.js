@@ -1,12 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var model_etudiant = require('../model/etudiant');
-var model_creneau = require('../model/creneau');
-
+var controller_admin = require('../controller/admin');
 
 // Home page route.
 router.get('/', function (req, res) {
-    res.send('admin home page');
+    controller_admin.login(req, res);
 });
 
 // About page route.
@@ -15,28 +13,15 @@ router.get('/groupe', function (req, res) {
 });
 
 router.get('/evenement', function (req, res) {
-    res.sendFile(path.join(__dirname, "../vue/evenement/create.html"));
+    buildFile(req, res, path.join(__dirname, "../vue/evenement/create.ejs"));
+
 });
 
 
 router.get('/creneau', function (req, res) {
-    res.sendFile(path.join(__dirname, "../vue/creneau/selection.html"));
+    controller_admin.getAllCreneau(req, res);
 });
 
-router.get('/creneau/read', function (req, res) {
-    var prom =model_creneau.getAllcreneau();
-    prom.then((value) => {
-
-        res.send(value);
-
-    }).catch(
-        function (){
-            console.log("y'a une erreur dans la fonction ")
-            res.send("error");
-        }
-    );
-
-});
 
 router.get('/groupe', function (req, res) {
     res.send('admin page groupe');

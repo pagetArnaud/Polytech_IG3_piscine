@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-1607nono.alwaysdata.net
--- Generation Time: Nov 28, 2020 at 01:28 PM
+-- Generation Time: Dec 15, 2020 at 08:42 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.29
 
@@ -18,42 +18,6 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Database: `1607nono_piscine`
---
-
-DELIMITER $$
---
--- Procedures
---
-CREATE
-    DEFINER = `1607nono`@`%` PROCEDURE `insert_creneau`(IN `datecreneau` DATE, IN `heuredebut` TIME, IN `duree` TIME,
-                                                        IN `heurefin` TIME, IN `evenement` INT(11),
-                                                        IN `salle` VARCHAR(8)) MODIFIES SQL DATA
-    COMMENT 'ajouter des creneau de heuredebut de duree interval jusqua hefin'
-BEGIN
-    DECLARE heure time;
-    SELECT heuredebut INTO heure;
-    WHILE (heure < heurefin)
-        DO
-            INSERT INTO `Creneau` (`date`, `heureDebut`, `salle`, `event`)
-            VALUES (datecreneau, heure, salle, evenement);
-            SELECT ADDTIME(heure, duree) INTO heure;
-        END WHILE;
-END$$
-
-CREATE
-    DEFINER = `1607nono`@`%` PROCEDURE `test_proc`() MODIFIES SQL DATA
-BEGIN
-    DECLARE i INT DEFAULT 1;
-    WHILE i < 100
-        DO
-            INSERT INTO test VALUES (i);
-            SET i = i + 1;
-        END WHILE;
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
