@@ -31,6 +31,12 @@ router.get('/creneau', function (req, res) {
     controller_etu.get_creneau(req, res)
 
 });
+router.get('/creneau/join', function (req, res) {
+    controller_etu.resa_Creneau(req, res)
+
+});
+
+
 
 
 module.exports = router;
