@@ -1,9 +1,8 @@
 
 var bd= require(path.join(__dirname,"../lib/conf"));
 
-//creneau
-//SELECT p.groupe,e.nom, e.prenom FROM Creneau c JOIN Participe p ON p.groupe=c.groupe JOIN Enseignant e ON p.enseignant=e.id
 function getcreneau(num) {
+    //Donne le créneau d'après son numero
     return new Promise((resolve, reject) => {
     bd.query ('SELECT * FROM creneau WHERE num=?',
         [num],
@@ -18,6 +17,7 @@ function getcreneau(num) {
 }
 
 function getCreneauEtu(numetu) {
+    //Donne le créneau d'un etudiant d'après son numero d'etudiant
     return new Promise((resolve, reject) => {
         bd.query('SELECT * FROM Creneau c JOIN Composer com on c.groupe=com.groupe WHERE com.etudiant=?', [numetu],
             function (err, result) {
@@ -30,6 +30,7 @@ function getCreneauEtu(numetu) {
 }
 
 function getAllcreneau() {
+    //Donne tout les créneau
     return new Promise((resolve, reject) => {
         bd.query ('SELECT * FROM Creneau',
             function(err, result){
