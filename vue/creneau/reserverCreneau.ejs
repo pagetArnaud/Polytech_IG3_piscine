@@ -18,7 +18,10 @@
             <td><%= row.heureDebut %></td>
             <td><%= row.salle %></td>
             <td>
-                <button class="button">Join</button>
+                <form action="" method="post">
+                    <input type="hidden" id="idCreneau" name="idCreneau" value="<%= row.num %>">
+                    <button class="button" type="submit">Join</button>
+                </form>
             </td>
         </tr>
     <% }); %>
