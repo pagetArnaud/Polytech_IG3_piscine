@@ -35,10 +35,11 @@ router.post("/evenement", function (req, res) {
 router.post('/evenement', function (req, res) {
     console.log(req.body);
 });*/
+var controller_admin = require('../controller/admin');
 
 // Home page route.
 router.get('/', function (req, res) {
-    res.send('admin home page');
+    controller_admin.login(req, res);
 });
 
 // About page route.
@@ -51,8 +52,9 @@ router.get('/evenement', function (req, res) {
     model_creneau.getcreneau(req.body.num);
 });
 
+
 router.get('/creneau', function (req, res) {
-    res.sendFile(path.join(__dirname, "../vue/creneau/selection.html"));
+    controller_admin.getAllCreneau(req, res);
 });
 
 router.get('/creneau/consultation', function (req, res) {
