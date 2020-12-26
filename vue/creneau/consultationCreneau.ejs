@@ -13,29 +13,37 @@
     </tr>
     <tbody>
     <tr>
+        <% if(etu){ %>
         <td>
-            <button name="button">P1811421</button>
+            <button name="button"><%= etu.numEtu %></button>
         </td>
         <td>
-            <button name="button">sofia</button>
+            <button name="button"><%= etu.nom %></button>
         </td>
         <td>
-            <button name="button">bouaklayene</button>
+            <button name="button"><%= etu.prenom %></button>
         </td>
+        <% } %>
         <% if(data){ %>
             <% var date = new Date(data.date); %>
             <td><%= date.getDate() %>/<%= date.getMonth() + 1 %>/<%= date.getFullYear() %></td>
             <td><%= data.salle %></td>
             <td><%= data.heureDebut %></td>
+        <% }else { %>
+            <td><i>Non définit</i></td>
+            <td><i>Non définit</i></td>
+            <td><i>Non définit</i></td>
         <% } %>
     </tr>
     </tbody>
 
     </thead>
 </table>
+<% if (data){ %>
 <button name="button">Modifier</button>
-
-
+<% }else { %>
+    <button name="button">Ajouter</button>
+<% } %>
 </body>
 
 <%- include('../commun/footer'); %>
