@@ -30,7 +30,7 @@ function getCreneauEtu(numetu) {
 }
 
 function getAllcreneau() {
-    //Donne tout les créneau
+    //Donne tout les créneaux
     return new Promise((resolve, reject) => {
         bd.query ('SELECT * FROM Creneau',
             function(err, result){
@@ -55,5 +55,20 @@ function getCreneauDispo() {
     });
 }
 
+function reserveCreneau(idGroup, idCreneau) {
+    return new Promise((resolve, reject) => {
+        bd.query('CALL resa_creneau(?,?)', [idGroup, idCreneau],
+            //resa_creneau(idGroup,idCreneau) suppose que idCreneau est dispo. Si le groupe a deja choisi un creneau,
+            //alors on annule la resa du premier creneau et on reserve le creneau IdCreneau
 
-module.exports = {getAllcreneau, getcreneau, getCreneauEtu, getCreneauDispo};
+            function (err, result) {
+                if (err) {
+                    reject(err);
+                }
+                resolve(result);
+            });
+    });
+}
+
+
+module.exports = {getAllcreneau, getcreneau, getCreneauEtu, getCreneauDispo, reserveCreneau};
