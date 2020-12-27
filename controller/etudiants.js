@@ -113,4 +113,6 @@ function getGroup(numEtu) {
 
 }
 
+
+
 module.exports = {login, register, get_creneau, resa_Creneau, create_resa_Creneau};
