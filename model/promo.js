@@ -31,6 +31,8 @@ function getPromo(num) {
     );
     });
 }
+
+
 function getAllPromo() {
     return new Promise((resolve, reject) => {
 
