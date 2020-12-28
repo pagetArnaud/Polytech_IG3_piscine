@@ -90,4 +90,20 @@ function addEvenement(req, res) {
 }
 
 
-module.exports = {login, getAllCreneau, addEvenement, modif_creneau, consult_creneau, getCreneau, getGroupe};
+function reserveCreneau(req, res) {
+    console.log(req.body.idGroupe)
+    console.log(req.body.idCreneau)
+    var prom = model_creneau.reserveCreneau(req.body.idGroupe,req.body.idCreneau);
+    prom.then((value) => {
+        console.log(value);
+        res.send("Bien modifié!");
+
+    }).catch(
+        function (){
+            res.send("Pas modifié");
+        }
+    );
+}
+
+
+module.exports = {login, getAllCreneau, addEvenement, modif_creneau, consult_creneau, getCreneau, getGroupe, reserveCreneau};

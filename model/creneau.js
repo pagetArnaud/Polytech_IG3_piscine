@@ -71,7 +71,7 @@ function reserveCreneau(idGroup, idCreneau) {
 }
 
 
-
+/*
 function updateByGroup(groupe) {
     return new Promise((resolve, reject) => {
         bd.query ('UPDATE creneau SET date = ?, heureDebut = ?  WHERE groupe = ?', [groupe],
@@ -83,6 +83,6 @@ function updateByGroup(groupe) {
             });
     });
 }
+*/
 
-
-module.exports = {getAllcreneau, getcreneau, getCreneauEtu, getCreneauDispo, reserveCreneau, updateByGroup};
+module.exports = {getAllcreneau, getcreneau, getCreneauEtu, getCreneauDispo, reserveCreneau};
