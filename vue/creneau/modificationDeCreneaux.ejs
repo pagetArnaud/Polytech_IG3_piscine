@@ -1,10 +1,12 @@
 <%- include('../commun/head'); %>
 
 <body>
-
+<form action="" method="post">
     <label for="site-search">Nom du groupe</label>
-    <input type="search" id="id" name="id"
+    <input type="search" name="idGroupe"
            aria-label="Search through site content">
+
+
 
 <table class="table">
     <thead>
@@ -23,16 +25,16 @@
             <td><%= row.heureDebut %></td>
             <td><%= row.salle %></td>
             <td>
-                <form action="" method="post">
-                    <input type="hidden" id="num" name="num" value="<%= row.num %>">
-                    <button class="button" type="submit">Choisir</button>
-                </form>
+
+                    <input type="radio" name="idCreneau" value="<%= row.num %>">
+
             </td>
         </tr>
     <% }); %>
     </tbody>
 </table>
-
+    <button class="button" type="submit">Choisir</button>
+</form>
 </body>
 
 <%- include('../commun/footer'); %>

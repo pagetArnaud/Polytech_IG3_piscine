@@ -53,8 +53,8 @@ router.get('/creneau/modification', function (req, res) {
 
 router.post('/creneau/modification', function(req,res) {
     controller_admin.getCreneau(req, res);
-
-
+    controller_admin.getGroupe(req, res);
+    controller_admin.reserveCreneau(req, res);
 
 });
 router.post('/creneau/modification', function(req,res) {
@@ -68,7 +68,10 @@ router.get('/creneau/consultation', function (req, res) {
     controller_admin.consult_creneau(req, res);
 });
 
-
+router.post('/creneau/consultation', function(req, res) {
+    console.log("oui");
+    controller_admin.getCreneau(req, res);
+})
 
 router.get('/creneau/read', function (req, res) {
     var prom =model_creneau.getAllcreneau();
