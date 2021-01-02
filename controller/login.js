@@ -21,7 +21,7 @@ function CheckPW(passwordToCheck, hash) {
     })
 }
 
-exports.login = (req, res, next) => {
+exports.login = (req, res) => {
     //console.log(req.body)
     const mail = req.body.email
     const mdp = req.body.password
@@ -33,12 +33,14 @@ exports.login = (req, res, next) => {
         pPassMatches.then((resultat) => {//Si les mdp sont identique
             console.log(resultat);
             var row = resultat[0];
-            var token = admins.includes(row.num) ? auth.cree(row.num, row.nom, row.prenom, true) : auth.cree(row.num, row.nom, row.prenom, false);
-            res.cookie("session", token);
-            //TODO redirect plutot que render ?
-            res.render('menu/index')
-
-
+            //On regarde si la personne qui vient de se login est un administrateur.
+            if (admins.includes(row.num)) {
+                res.cookie("session", auth.cree(row.num, row.nom, row.prenom, true), {expires : 0}); //expires signifie que dès qu'on ferme le navigateur, le cookie est expiré
+                res.redirect("/admin")
+            } else {
+                res.cookie("session", auth.cree(row.num, row.nom, row.prenom, false), {expires : 0});
+                res.redirect("/etu")
+            }
         }).catch((err) => {
             console.log(err)
             res.render('connexion/login', {alreadyRegistered : false, loginFailed : true})

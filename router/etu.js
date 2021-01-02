@@ -1,12 +1,10 @@
-var express = require('express');
-var router = express.Router();
-var controller_etu = require('../controller/etudiants');
-var groupe = require(path.join(__dirname, "groupe"));
-var registration = require('../controller/registration');
-var login = require('../controller/login');
-const {check, validationResult} = require('express-validator');
-//TODO: enlever les require inutiles
-var auth = require("../lib/auth");
+const express = require('express');
+const router = express.Router();
+const controller_etu = require('../controller/etudiants');
+const path = require("path");
+const groupe = require(path.join(__dirname, "groupe"));
+const auth = require("../lib/auth");
+
 
 router.use(function (req, res, next) {
     var cookie = req.cookies["session"];
@@ -20,12 +18,12 @@ router.use(function (req, res, next) {
     })
 });
 
+
 // About page route.
 router.use('/groupe', groupe);
 
 router.get('/creneau', function (req, res) {
     controller_etu.get_creneau(req, res)
 });
-
 
 module.exports = router;

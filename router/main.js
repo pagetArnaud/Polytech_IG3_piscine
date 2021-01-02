@@ -1,25 +1,26 @@
-var express = require('express');
-var app = express();
-var http = require('http').Server(app);
-var fs = require('fs');
-var etu=require(path.join(__dirname,"etu"));
-var admin=require(path.join(__dirname,"admin"));
+const express = require('express');
+const app = express();
+const http = require('http').Server(app);
+const etu = require(path.join(__dirname, "etu"));
+const admin = require(path.join(__dirname, "admin"));
 const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 5000;
-var controller_etu = require('../controller/etudiants');
-var jwt = require('jsonwebtoken');
+const controller_etu = require('../controller/etudiants');
 const bodyParser = require('body-parser');
-var registration = require('../controller/registration');
-var login = require('../controller/login');
-//TODO retirer les require inutiles
+const registration = require('../controller/registration');
+const login = require('../controller/login');
+
+
 //TODO faire en sorte qu'on ne puisse pas accéder aux pages de login une fois connecté -> rediriger vers le menu admin ou etu
-//TODO combien de temps dure le token? Faut il créer une expiration et le rafraichir ?
+
 
 app.set('view engine', 'ejs');//pour utliser le moteur de view EJS
 app.set('views', path.join(__dirname, '/../vue'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+
+
 
 app.get("/", function (req, res) {
 
@@ -34,7 +35,7 @@ app.get("/log", function (req, res) {
     date = date.substring(0, 10) + ".log";
     res.sendFile("/home/1607nono/admin/logs/sites/2020/sites-" + date);
 });
-
+//TODO appeler middleware proprement
 //Partie login-------------------------------------------------
 app.get('/login', function (req, res) {
     controller_etu.login(req, res);

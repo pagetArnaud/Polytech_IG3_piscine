@@ -23,13 +23,13 @@
                 </div>
                 <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Adresse e-mail universitaire"></div>
                 <div class="form-group"><input class="form-control" type="text" name="studNo" placeholder="Numéro étudiant"></div>
+
                 <label for="exampleFormControlSelect1">Promo
                     <select class="form-control" id="exampleFormControlSelect1" name = "promo">
-                        <%//TODO obtenir promo depuis la DB%>
-                        <option value="IG3">IG3</option>
-                        <option value="GBA">GBA</option>
-                        <option value="GBA555">MAT</option>
-
+                            <% for (var i = 0; i < promo.length; i++) { %>
+                                <option value= "<%= promo[i].id %>"><%= promo[i].id %></option>
+                            <%}%>
+                        <option value="MAT">MAT</option>
                     </select></label>
                 <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Mot de passe"></div>
                 <div class="form-group"><input class="form-control" type="password" name="password2" placeholder="Confirmer le mot de passe"></div>

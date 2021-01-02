@@ -54,14 +54,13 @@ exports.correctForm = function (req, res) {
     var hash = bcrypt.hashSync(data.password, salt);
     console.log(hash)
     console.log(data.studNo, data.name, data.firstname, data.email, hash, data.promo)
-    prom = etudiant.addEtudiant(data.studNo, data.name, data.firstname, data.email, hash, data.promo)
+    prom = etudiant.addEtudiant(data.studNo, data.name, data.firstname, data.email, hash, "IG3")
     prom.then(() => {
         var token = auth.cree(data.studNo, data.name, data.firstname, false);
         res.render('menu/index', {Registration : true})
     }).catch((err) => {
         //Si l'étudiant est déjà inscrit
         console.log(err)
-        res.render('connexion/login', {alreadyRegistered : true, loginFailed : false})
     })
 }
 
