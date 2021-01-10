@@ -23,10 +23,6 @@ router.use(function (req, res, next) {
         res.redirect('../login')
     }
 });
-//Envoie formulaire à bdd
-router.post("/evenement", function (req, res) {
-    controller_admin.addEvenement(req, res);
-});
 // Home page route.
 router.get('/', function (req, res) {
     res.send("bienvenu chez les admin")
@@ -39,57 +35,29 @@ router.get('/groupe', function (req, res) {
 
 router.get('/evenement', function (req, res) {
     res.render(path.join(__dirname, "../vue/evenement/create"));
-    //TODO Effacer ?
-    model_creneau.getcreneau(req.body.num);
+
 });
 
+//Envoie formulaire à bdd
+router.post("/evenement", function (req, res) {
+    controller_admin.addEvenement(req, res);
+});
 
 router.get('/creneau', function (req, res) {
-    controller_admin.getAllCreneau(req, res);
+    controller_admin.consult_creneau(req, res);
 });
 
 
 router.get('/creneau/modification', function (req, res) {
-    //res.render(path.join(__dirname, "../vue/creneau/modificationDeCreneaux"));
+
     controller_admin.modif_creneau(req, res);
 });
 
 router.post('/creneau/modification', function (req, res) {
-    //TODO effacer les deux lignes
-    controller_admin.getCreneau(req, res);
-    controller_admin.getGroupe(req, res);
     controller_admin.reserveCreneau(req, res);
 });
-router.get('/groupe', function (req, res) {
-    res.send('admin page groupe');
-});
 
 
-router.get('/creneau/consultation', function (req, res) {
-    //res.render(path.join(__dirname, "../vue/creneau/consultation_creneau"));
-    controller_admin.consult_creneau(req, res);
-});
-
-//TODO à effacer
-router.post('/creneau/consultation', function (req, res) {
-    controller_admin.getCreneau(req, res);
-})
-
-//TODO à effacer
-router.get('/creneau/read', function (req, res) {
-    var prom = model_creneau.getAllcreneau();
-    prom.then((value) => {
-
-        res.send(value);
-
-    }).catch(
-        function () {
-            console.log("y'a une erreur dans la fonction ")
-            res.send("error");
-        }
-    );
-
-});
 
 
 module.exports = router;

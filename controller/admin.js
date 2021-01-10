@@ -6,18 +6,7 @@ function login(req, res) {
     res.render("connexion/login")
 }
 
-function getAllCreneau(req, res) {
-    var prom = model_creneau.getAllcreneau();
-    prom.then((value) => {
-        res.render("creneau/selection", {creneau: value});
 
-    }).catch(
-        function () {
-            console.log("y'a une erreur dans la fonction ")
-            res.send("error");
-        }
-    );
-}
 function getCreneau(req, res) {
     var prom = model_creneau.getcreneau(req.body.num);
     prom.then((value) => {
@@ -81,9 +70,8 @@ function addEvenement(req, res) {
 
         res.send("Evenement créé !");
 
-    }).catch(
-        function (){
-            //console.log("Formulaire non rempli correctement")
+    }).catch((error) => {
+        console.log(error);
             res.send("Formulaire non rempli correctement");
         }
     );
@@ -91,12 +79,12 @@ function addEvenement(req, res) {
 
 
 function reserveCreneau(req, res) {
-    console.log(req.body.idGroupe)
-    console.log(req.body.idCreneau)
+    console.log(req.body.idGroupe);
+    console.log(req.body.idCreneau);
     var prom = model_creneau.reserveCreneau(req.body.idGroupe,req.body.idCreneau);
     prom.then((value) => {
         console.log(value);
-        res.send("Bien modifié!");
+        res.redirect("../");
 
     }).catch(
         function (){
@@ -106,4 +94,4 @@ function reserveCreneau(req, res) {
 }
 
 
-module.exports = {login, getAllCreneau, addEvenement, modif_creneau, consult_creneau, getCreneau, getGroupe, reserveCreneau};
+module.exports = {login, getAllCreneau, addEvenement, modif_creneau, consult_creneau, getGroupe, reserveCreneau};
