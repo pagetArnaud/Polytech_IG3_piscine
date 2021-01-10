@@ -83,7 +83,7 @@ function addEvenement(req, res) {
 
     }).catch(
         function (){
-            console.log("Formulaire non rempli correctement")
+            //console.log("Formulaire non rempli correctement")
             res.send("Formulaire non rempli correctement");
         }
     );
