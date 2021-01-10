@@ -60,6 +60,7 @@ exports.correctForm = function (req, res) {
     prom.then(() => {
         var token = auth.cree(data.studNo, data.name, data.firstname, false);
         res.cookie("session", token);
+
         res.redirect("/etu/");
         //res.render('menu/index', {Registration : true})
     }).catch((err) => {

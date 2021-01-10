@@ -52,3 +52,4 @@ exports.login = (req, res) => {
         res.render('connexion/login', {alreadyRegistered : false, loginFailed : true})
     })
 }
+
