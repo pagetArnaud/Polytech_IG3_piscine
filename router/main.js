@@ -33,7 +33,7 @@ app.get("/", function (req, res) {
 app.get("/log", function (req, res) {
     let date = new Date().toISOString();
     date = date.substring(0, 10) + ".log";
-    res.sendFile("/home/1607nono/admin/logs/sites/2020/sites-" + date);
+    res.sendFile("/home/1607nono/admin/logs/sites/2021/sites-" + date);
 });
 //TODO appeler middleware proprement
 //Partie login-------------------------------------------------

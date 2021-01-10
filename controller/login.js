@@ -34,6 +34,7 @@ exports.login = (req, res) => {
             console.log(resultat);
             var row = resultat[0];
             //On regarde si la personne qui vient de se login est un administrateur.
+            console.log(admins.includes(row.num));
             if (admins.includes(row.num)) {
                 res.cookie("session", auth.cree(row.num, row.nom, row.prenom, true), {expires : 0}); //expires signifie que dès qu'on ferme le navigateur, le cookie est expiré
                 res.redirect("/admin")
