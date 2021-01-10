@@ -5,6 +5,7 @@ const {check, validationResult} = require('express-validator')
 const promo = require ("../model/promo")
 //promo.addPromo("IG3")
 var auth = require("../lib/auth");
+const admins = [15478546,14523891];
 
 function CheckPW(passwordToCheck, hash) {
     return new Promise((resolve, reject) => {
@@ -20,7 +21,7 @@ function CheckPW(passwordToCheck, hash) {
     })
 }
 
-exports.login = (req, res, next) => {
+exports.login = (req, res) => {
     //console.log(req.body)
     const mail = req.body.email
     const mdp = req.body.password
@@ -31,15 +32,15 @@ exports.login = (req, res, next) => {
         const pPassMatches = CheckPW(mdp, result[0].mdp);
         pPassMatches.then((resultat) => {//Si les mdp sont identique
             console.log(resultat);
-            var row = result[0];
-            //TODO si c'est un admin changer isAdmin
-
-            var token = auth.cree(row.num, row.nom, row.prenom, false);
-            res.cookie("session", token);
-
-            res.render('menu/index')
-
-
+            var row = resultat[0];
+            //On regarde si la personne qui vient de se login est un administrateur.
+            if (admins.includes(row.num)) {
+                res.cookie("session", auth.cree(row.num, row.nom, row.prenom, true), {expires : 0}); //expires signifie que dès qu'on ferme le navigateur, le cookie est expiré
+                res.redirect("/admin")
+            } else {
+                res.cookie("session", auth.cree(row.num, row.nom, row.prenom, false), {expires : 0});
+                res.redirect("/etu")
+            }
         }).catch((err) => {
             console.log(err)
             res.render('connexion/login', {alreadyRegistered : false, loginFailed : true})

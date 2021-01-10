@@ -3,7 +3,7 @@ var expV = require("express-validator")
 var bcrypt = require("bcryptjs")
 const {check, validationResult} = require('express-validator')
 const promo = require ("../model/promo")
-//promo.addPromo("IG3")
+var auth = require("../lib/auth");
 
 exports.checkDataIsValidAndSanitize = [
     check("firstname")
@@ -14,22 +14,17 @@ exports.checkDataIsValidAndSanitize = [
         .isLength({ min: 3 })
         .withMessage("Le nom doit avoir au moins 3 lettres.")
         .trim(),
-    //TODO: verif num étudiant
-    check("name")
-        .isLength({ min: 3 })
-        .withMessage("Le nom doit avoir au moins 3 lettres.")
+    check("studNo")
+        .isLength({ min: 8 , max :8})
+        .withMessage("Le numéro étudiant est composé de 8 chiffres, à ne pas confondre avec le code INE.")
         .trim(),
-
     check("email")
         .isEmail()
-        .withMessage("Email invalide")
+        .withMessage("Adresse e-mail invalide.")
         .normalizeEmail(),
-
     check("password")
         .isLength({ min: 6, max: 15 })
         .withMessage("Merci d'entrer un mot de passe entre 6 et 15 caractères."),
-
-
     check("password2").custom((value, { req }) => {
         if (value !== req.body.password) {
             console.log(req.body.password, req.body.confirmPassword);
@@ -51,25 +46,21 @@ exports.checkCorrectness = function (req, res, next) {
     }
 }
 exports.correctForm = function (req, res) {
-    //console.log(req.body)
+    console.log(req.body)
     data = req.body
-    name = data.name
-    firstname = data.firstname
-    email = data.email
-    password = data.password
     num = data.studNo
-    //TODO : OBTENIR LA PROMO
     //cryptage du mdp
     var salt = bcrypt.genSaltSync(10);
-    var hash = bcrypt.hashSync(password, salt);
+    var hash = bcrypt.hashSync(data.password, salt);
     console.log(hash)
-    prom = etudiant.addEtudiant(num, name, firstname, email, hash, "IG3")
+    console.log(data.studNo, data.name, data.firstname, data.email, hash, data.promo)
+    prom = etudiant.addEtudiant(data.studNo, data.name, data.firstname, data.email, hash, "IG3")
     prom.then(() => {
-        //TODO : renvoyer vers la page d'accueil des étudiants avec un message disant que l'inscription s'est bien déroulée
-        res.render('menu/index')
-    }).catch(() => {
+        var token = auth.cree(data.studNo, data.name, data.firstname, false);
+        res.render('menu/index', {Registration : true})
+    }).catch((err) => {
         //Si l'étudiant est déjà inscrit
-        res.render('connexion/login', {alreadyRegistered : true})
+        console.log(err)
     })
 }
 

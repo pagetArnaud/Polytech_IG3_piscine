@@ -1,14 +1,22 @@
 var model_etudiant = require('../model/etudiant');
 var model_creneau = require('../model/creneau');
+const promoModel = require('../model/promo')
 
 var bd = require(path.join(__dirname, "../lib/conf"));//Temporaire
 
 function login(req, res) {
-    res.render("connexion/login", {alreadyRegistered: false, loginFailed: false})
+    res.render("connexion/login", {alreadyRegistered : false, loginFailed : false})
 }
 
 function register(req, res) {
-    res.render("connexion/register")
+    promo = promoModel.getAllPromo()
+    promo.then((result) => {
+        res.render("connexion/register", {promo : result})
+    }).catch((err) => {
+        console.log(err)
+        res.render("connexion/register", {promo : []})
+    })
+
 }
 
 

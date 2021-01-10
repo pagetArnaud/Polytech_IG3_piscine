@@ -13,7 +13,7 @@
 <div class="register-photo">
         <div class="form-container">
             <div class="image-holder"></div>
-            <form action="/etu/register/" method="post">
+            <form action="/register/" method="post">
                 <h2 class="text-center"><strong>Créer</strong>&nbsp;un compte.</h2>
                 <div class="form-group">
                     <div class="form-row">
@@ -23,12 +23,13 @@
                 </div>
                 <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Adresse e-mail universitaire"></div>
                 <div class="form-group"><input class="form-control" type="text" name="studNo" placeholder="Numéro étudiant"></div>
-                <label for="exampleFormControlSelect1">Promo
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option>IG3</option>
-                        <option>GBA</option>
-                        <option>MAT</option>
 
+                <label for="exampleFormControlSelect1">Promo
+                    <select class="form-control" id="exampleFormControlSelect1" name = "promo">
+                            <% for (var i = 0; i < promo.length; i++) { %>
+                                <option value= "<%= promo[i].id %>"><%= promo[i].id %></option>
+                            <%}%>
+                        <option value="MAT">MAT</option>
                     </select></label>
                 <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Mot de passe"></div>
                 <div class="form-group"><input class="form-control" type="password" name="password2" placeholder="Confirmer le mot de passe"></div>
