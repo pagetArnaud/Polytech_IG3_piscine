@@ -8,18 +8,21 @@ var auth = require("../lib/auth");
 
 router.use(function (req, res, next) {
     var cookie = req.cookies["session"];
-    console.log(typeof (auth.getTokenCookie));
-    var prom = auth.getTokenCookie(cookie);
-    prom.then((token) => {
+
+    var token = auth.getTokenCookie(cookie);
+    console.log("on check le token dans etu");
+    console.log(token);
+    if (token) {
         req.token = token; //On passe le token au prochain middleware si il est bien décrypté
         next()
-    }).catch((msg) => { //Si on ne peut pas decripter le token ou si le cookie n'existe pas, on demande de se re-login
-        console.log(msg);
+    } else { //Si on ne peut pas decripter le token ou si le cookie n'existe pas, on demande de se re-login
+        console.log("on ne peut pas decrypter le token etu");
         res.redirect('../login')
-    })
+    }
 });
-
-
+router.get("/", function (req, res) {
+    res.render("menu/index");
+});
 // About page route.
 router.use('/groupe', groupe);
 

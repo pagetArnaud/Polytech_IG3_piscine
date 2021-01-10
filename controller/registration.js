@@ -32,7 +32,7 @@ exports.checkDataIsValidAndSanitize = [
         }
         return true;
     }),
-]
+];
 exports.checkCorrectness = function (req, res, next) {
     const error = validationResult(req).formatWith(({ msg }) => msg);
 
@@ -40,24 +40,28 @@ exports.checkCorrectness = function (req, res, next) {
 
     if (hasError) {
         console.log(error);
-        res.render('connexion/register', {error : error.errors})
+        var pro = req.body.promo;
+        pro.id = req.body.promo;
+        res.render('connexion/register', {error: error.errors, promo: [pro]})
     } else {
         next();
     }
-}
+};
 exports.correctForm = function (req, res) {
-    console.log(req.body)
-    data = req.body
-    num = data.studNo
+    console.log(req.body);
+    data = req.body;
+    num = data.studNo;
     //cryptage du mdp
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(data.password, salt);
-    console.log(hash)
-    console.log(data.studNo, data.name, data.firstname, data.email, hash, data.promo)
-    prom = etudiant.addEtudiant(data.studNo, data.name, data.firstname, data.email, hash, "IG3")
+    console.log(hash);
+    console.log(data.studNo, data.name, data.firstname, data.email, hash, data.promo);
+    prom = etudiant.addEtudiant(data.studNo, data.name, data.firstname, data.email, hash, data.promo);
     prom.then(() => {
         var token = auth.cree(data.studNo, data.name, data.firstname, false);
-        res.render('menu/index', {Registration : true})
+        res.cookie("session", token);
+        res.redirect("/etu/");
+        //res.render('menu/index', {Registration : true})
     }).catch((err) => {
         //Si l'étudiant est déjà inscrit
         console.log(err)

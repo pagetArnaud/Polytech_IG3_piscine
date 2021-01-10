@@ -1,11 +1,22 @@
 var model_etudiant = require('../model/etudiant');
 var model_creneau = require('../model/creneau');
-const promoModel = require('../model/promo')
+const promoModel = require('../model/promo');
+var auth = require("../lib/auth");
 
 var bd = require(path.join(__dirname, "../lib/conf"));//Temporaire
 
 function login(req, res) {
-    res.render("connexion/login", {alreadyRegistered : false, loginFailed : false})
+    var cookie = req.cookies["session"];
+    var token = auth.getTokenCookie(cookie);
+    if (token) {
+        if (token.isAdmin) {//Si on est bien un admin
+            res.redirect('admin');
+        } else {//sinon
+            res.redirect('etu');
+        }
+    } else { //Si on ne peut pas decripter le token ou si le cookie n'existe pas, on demande de se re-login
+        res.render("connexion/login", {alreadyRegistered: false, loginFailed: false})
+    }
 }
 
 function register(req, res) {
@@ -57,13 +68,13 @@ function create_resa_Creneau(req, res) {
     if (cren) {//Si on a bien un identifiant de créneau dans les parametres
         var groupe = getGroup(etu.numEtu);
         groupe.then((value) => {
-            var idGroupe = value[0].groupe
+            var idGroupe = value[0].groupe;
             if (idGroupe) {//Si l'etudiant est bien dans un groupe
 
                 prom = model_creneau.reserveCreneau(idGroupe, cren);
                 prom.then((valeur) => {
 
-                    res.redirect("./")
+                    res.redirect("../")
 
                 }).catch((error) => {
 
