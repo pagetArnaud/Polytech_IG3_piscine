@@ -7,12 +7,13 @@ router.use(function (req, res, next) {
     var cookie = req.cookies["session"];
     var prom = auth.getTokenCookie(cookie);
     prom.then((token) => {
+        console.log("On est dans admin et un token");
         if (token.isAdmin) {//Si on est bien un admin
             req.token = token; //On passe le token au prochain middleware si il est bien décrypté
             next()
-        } else {
+        } else {//sinon
             res.status(403).send("Accès interdit: vous n'êtes pas ADMIN");
-        }//sinon
+        }
     }).catch((msg) => { //Si on ne peut pas decripter le token ou si le cookie n'existe pas, on demande de se re-login
         console.log(msg);
         res.redirect('../login')
@@ -20,7 +21,7 @@ router.use(function (req, res, next) {
 });
 // Home page route.
 router.get('/', function (req, res) {
-    controller_admin.login(req, res);
+    res.send("bienvenu chez les admin")
 });
 
 // About page route.
