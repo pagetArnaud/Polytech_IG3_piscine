@@ -20,7 +20,7 @@ function login(req, res) {
 }
 
 function register(req, res) {
-    promo = promoModel.getAllPromo()
+    promo = promoModel.getAllPromo();
     promo.then((result) => {
         res.render("connexion/register", {promo : result})
     }).catch((err) => {
@@ -36,7 +36,6 @@ function get_creneau(req, res) {
     var prom = model_creneau.getCreneauEtu(etu.numEtu);
 
     prom.then((value) => {
-
         res.render("creneau/consultationCreneau", {data: value[0], etu: etu});
 
     }).catch((error) => {
@@ -68,8 +67,8 @@ function create_resa_Creneau(req, res) {
     if (cren) {//Si on a bien un identifiant de créneau dans les parametres
         var groupe = getGroup(etu.numEtu);
         groupe.then((value) => {
-            var idGroupe = value[0].groupe;
-            if (idGroupe) {//Si l'etudiant est bien dans un groupe
+            if (value[0]) {//Si l'etudiant est bien dans un groupe
+                var idGroupe = value[0].groupe;
 
                 prom = model_creneau.reserveCreneau(idGroupe, cren);
                 prom.then((valeur) => {
@@ -82,6 +81,9 @@ function create_resa_Creneau(req, res) {
                         res.send(error);
                     }
                 );
+            } else {
+                console.log("pas dans un groupe");
+                res.redirect("../groupe");
             }
         }).catch((error) => {
 
