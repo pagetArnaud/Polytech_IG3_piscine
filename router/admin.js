@@ -1,5 +1,9 @@
 var express = require('express');
 var router = express.Router();
+var model_etudiant = require('../model/etudiant');
+var model_creneau = require('../model/creneau');
+var model_event = require("../model/evenement");
+var bodyParser = require("body-parser");
 var controller_admin = require('../controller/admin');
 var auth = require("../lib/auth");
 
@@ -30,18 +34,56 @@ router.get('/groupe', function (req, res) {
 });
 
 router.get('/evenement', function (req, res) {
-    buildFile(req, res, path.join(__dirname, "../vue/evenement/create.ejs"));
-
+    res.render(path.join(__dirname, "../vue/evenement/create"));
+    model_creneau.getcreneau(req.body.num);
 });
-
+//Envoie formulaire à bdd
+router.post("/evenement", function (req, res) {
+    controller_admin.addEvenement(req, res);
+});
 
 router.get('/creneau', function (req, res) {
     controller_admin.getAllCreneau(req, res);
 });
 
 
-router.get('/groupe', function (req, res) {
-    res.send('admin page groupe');
+router.get('/creneau/modification', function (req, res) {
+    //res.render(path.join(__dirname, "../vue/creneau/modificationDeCreneaux"));
+    controller_admin.modif_creneau(req, res);
 });
+
+router.post('/creneau/modification', function(req,res) {
+    controller_admin.getCreneau(req, res);
+    controller_admin.getGroupe(req, res);
+    controller_admin.reserveCreneau(req, res);
+
+});
+
+
+
+router.get('/creneau/consultation', function (req, res) {
+    //res.render(path.join(__dirname, "../vue/creneau/consultation_creneau"));
+    controller_admin.consult_creneau(req, res);
+});
+
+router.post('/creneau/consultation', function(req, res) {
+    controller_admin.getCreneau(req, res);
+})
+
+router.get('/creneau/read', function (req, res) {
+    var prom =model_creneau.getAllcreneau();
+    prom.then((value) => {
+
+        res.send(value);
+
+    }).catch(
+        function (){
+            console.log("y'a une erreur dans la fonction ")
+            res.send("error");
+        }
+    );
+
+});
+
 
 module.exports = router;
