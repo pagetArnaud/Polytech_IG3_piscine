@@ -5,8 +5,8 @@ var auth = require("../lib/auth");
 
 router.use(function (req, res, next) {
     var cookie = req.cookies["session"];
-    var prom = auth.getTokenCookie(cookie);
-    prom.then((token) => {
+    var token = auth.getTokenCookie(cookie);
+    if (token) {
         console.log("On est dans admin et un token");
         if (token.isAdmin) {//Si on est bien un admin
             req.token = token; //On passe le token au prochain middleware si il est bien décrypté
@@ -14,10 +14,10 @@ router.use(function (req, res, next) {
         } else {//sinon
             res.status(403).send("Accès interdit: vous n'êtes pas ADMIN");
         }
-    }).catch((msg) => { //Si on ne peut pas decripter le token ou si le cookie n'existe pas, on demande de se re-login
-        console.log(msg);
+    } else { //Si on ne peut pas decripter le token ou si le cookie n'existe pas, on demande de se re-login
+        console.log("probleme de décodage du token");
         res.redirect('../login')
-    })
+    }
 });
 // Home page route.
 router.get('/', function (req, res) {

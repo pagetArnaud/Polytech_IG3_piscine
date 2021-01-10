@@ -38,10 +38,10 @@ exports.login = (req, res) => {
 
             if (admins.includes(row.num * 1)) {
                 res.cookie("session", auth.cree(row.num, row.nom, row.prenom, true), {expires : 0}); //expires signifie que dès qu'on ferme le navigateur, le cookie est expiré
-                res.redirect("/admin")
+                res.redirect("/admin/")
             } else {
                 res.cookie("session", auth.cree(row.num, row.nom, row.prenom, false), {expires : 0});
-                res.redirect("/etu")
+                res.redirect("/etu/")
             }
         }).catch((err) => {
             console.log(err);
