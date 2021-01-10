@@ -94,4 +94,4 @@ function reserveCreneau(req, res) {
 }
 
 
-module.exports = {login, getAllCreneau, addEvenement, modif_creneau, consult_creneau, getGroupe, reserveCreneau};
+module.exports = {login, addEvenement, modif_creneau, consult_creneau, getGroupe, reserveCreneau};
