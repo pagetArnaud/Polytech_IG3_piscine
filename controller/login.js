@@ -32,10 +32,11 @@ exports.login = (req, res) => {
         const pPassMatches = CheckPW(mdp, result[0].mdp);
         pPassMatches.then((resultat) => {//Si les mdp sont identique
             console.log(resultat);
-            var row = resultat[0];
+            var row = result[0];
             //On regarde si la personne qui vient de se login est un administrateur.
-            console.log(admins.includes(row.num));
-            if (admins.includes(row.num)) {
+            console.log("Row num: " + row.num);
+
+            if (admins.includes(row.num * 1)) {
                 res.cookie("session", auth.cree(row.num, row.nom, row.prenom, true), {expires : 0}); //expires signifie que dès qu'on ferme le navigateur, le cookie est expiré
                 res.redirect("/admin")
             } else {
@@ -43,10 +44,11 @@ exports.login = (req, res) => {
                 res.redirect("/etu")
             }
         }).catch((err) => {
-            console.log(err)
+            console.log(err);
             res.render('connexion/login', {alreadyRegistered : false, loginFailed : true})
         })
     }).catch((err) => {
+        console.log("on est là")
         res.render('connexion/login', {alreadyRegistered : false, loginFailed : true})
     })
 }
