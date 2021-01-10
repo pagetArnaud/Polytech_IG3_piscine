@@ -57,10 +57,7 @@ router.post('/creneau/modification', function(req,res) {
     controller_admin.reserveCreneau(req, res);
 
 });
-router.post('/creneau/modification', function(req,res) {
-    controller_admin.getGroupe(req, res);
 
-});
 
 
 router.get('/creneau/consultation', function (req, res) {
@@ -69,7 +66,6 @@ router.get('/creneau/consultation', function (req, res) {
 });
 
 router.post('/creneau/consultation', function(req, res) {
-    console.log("oui");
     controller_admin.getCreneau(req, res);
 })
 

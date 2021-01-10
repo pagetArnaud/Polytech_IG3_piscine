@@ -24,17 +24,15 @@
                     <p>LIBRE</p>
                     </td>
                 <% } %>
-            <td>
-                <form action="" method="post">
-                    <input type="hidden" id="groupe" name="groupe" value="<%= row.num %>">
-                    <button class="button" type="submit">Modifier</button>
-                </form>
-            </td>
         </tr>
     <% }); %>
     </tbody>
-</table>
 
+</table>
+<form action="modification" method="get">
+    <input type="hidden" id="groupe" name="groupe" >
+    <button class="button" type="submit">Modifier</button>
+</form>
 </body>
 
 <%- include('../commun/footer'); %>
