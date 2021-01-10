@@ -1,15 +1,15 @@
-
+<%- include('../commun/head'); %>
 <body>
 <div>
-    <form>
+    <form action="evenement" method="post" name="EVENT">
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="stage" checked>
+            <input class="form-check-input" type="radio" name="name" id="exampleRadios1" value="stage" checked>
             <label class="form-check-label" for="exampleRadios1">
                 Stage
             </label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="projet">
+            <input class="form-check-input" type="radio" name="name" id="exampleRadios2" value="projet">
             <label class="form-check-label" for="exampleRadios2">
                 Projet
             </label>
@@ -19,7 +19,7 @@
 
             <div class="col">
                 <label for="exampleFormControlSelect1">Promo
-                    <select class="form-control" id="exampleFormControlSelect1">
+                    <select class="form-control" id="exampleFormControlSelect1" name="promo">
                         <option>IG</option>
                         <option>GBA</option>
                         <option>MAT</option>
@@ -29,6 +29,11 @@
             <div class=" col">
                 <label>Duree evenement
                     <input type="number" name="dureeEvent" min="1" value="1" class="form-control">
+                </label>
+            </div>
+            <div class=" col">
+                <label>Nombre Jury
+                    <input type="number" name="nbrJury" min="1" value="1" class="form-control">
                 </label>
             </div>
         </div>
@@ -48,9 +53,12 @@
             <input type="date" name="dateLimiteResa">
         </div>
 
-        <button type="submit" class="btn btn-primary">Envoyer</button>
+        <button type="submit" class="btn btn-primary" value="post">Envoyer</button>
 
 
     </form>
 </div>
 </body>
+
+
+<%- include('../commun/footer'); %>

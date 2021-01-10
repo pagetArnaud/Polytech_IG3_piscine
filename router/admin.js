@@ -2,39 +2,30 @@ var express = require('express');
 var router = express.Router();
 var model_etudiant = require('../model/etudiant');
 var model_creneau = require('../model/creneau');
-var fs = require('fs');
+var model_event = require("../model/evenement");
+var bodyParser = require("body-parser");
+var controller_admin = require('../controller/admin');
+var auth = require("../lib/auth");
 
-
-function buildFile(req, res, chemin) {
-    fs.readFile(path.join(__dirname, "../vue/commun/head.html"), function (err, head) {
-        if (err) {
-            console.log(err);
-            res.status(404).send('Page introuvable !!!! ');
-        } else {
-            fs.readFile(chemin, function (err, data) {
-                if (err) {
-                    console.log(err);
-                    res.status(404).send('Page introuvable !!!! ');
-                } else {
-                    fs.readFile(path.join(__dirname, "../vue/commun/footer.html"), function (err, footer) {
-                        if (err) {
-                            console.log(err);
-                            res.status(404).send('Page introuvable !!!! ');
-                        } else {
-                            ouput = head.toString().concat(data.toString(), footer.toString());
-                            res.send(ouput);
-                        }
-                    })
-                }
-            });
+router.use(function (req, res, next) {
+    var cookie = req.cookies["session"];
+    var token = auth.getTokenCookie(cookie);
+    if (token) {
+        console.log("On est dans admin et un token");
+        if (token.isAdmin) {//Si on est bien un admin
+            req.token = token; //On passe le token au prochain middleware si il est bien décrypté
+            next()
+        } else {//sinon
+            res.status(403).send("Accès interdit: vous n'êtes pas ADMIN");
         }
-    });
-}
-
+    } else { //Si on ne peut pas decripter le token ou si le cookie n'existe pas, on demande de se re-login
+        console.log("probleme de décodage du token");
+        res.redirect('../login')
+    }
+});
 // Home page route.
 router.get('/', function (req, res) {
-    buildFile(res, res, path.join(__dirname, "../vue/connexion/login.html"));
-    // res.sendFile(path.join(__dirname, "../vue/connexion/login.html"));
+    res.send("bienvenu chez les admin")
 });
 
 // About page route.
@@ -43,32 +34,30 @@ router.get('/groupe', function (req, res) {
 });
 
 router.get('/evenement', function (req, res) {
-    buildFile(req, res, path.join(__dirname, "../vue/evenement/create.html"));
-    //res.sendFile(path.join(__dirname, "../vue/evenement/create.html"));
+    res.render(path.join(__dirname, "../vue/evenement/create"));
+
 });
 
+//Envoie formulaire à bdd
+router.post("/evenement", function (req, res) {
+    controller_admin.addEvenement(req, res);
+});
 
 router.get('/creneau', function (req, res) {
-    buildFile(req, res, path.join(__dirname, "../vue/creneau/selection.html"));
+    controller_admin.consult_creneau(req, res);
 });
 
-router.get('/creneau/read', function (req, res) {
-    var prom =model_creneau.getAllcreneau();
-    prom.then((value) => {
 
-        res.send(value);
+router.get('/creneau/modification', function (req, res) {
 
-    }).catch(
-        function (){
-            console.log("y'a une erreur dans la fonction ")
-            res.send("error");
-        }
-    );
-
+    controller_admin.modif_creneau(req, res);
 });
 
-router.get('/groupe', function (req, res) {
-    res.send('admin page groupe');
+router.post('/creneau/modification', function (req, res) {
+    controller_admin.reserveCreneau(req, res);
 });
+
+
+
 
 module.exports = router;

@@ -1,3 +1,4 @@
+path = require("path")
 var bd = require(path.join(__dirname, "../lib/conf"));
 
 //Etudiant
@@ -30,6 +31,20 @@ function getEtudiant(num) {
         );
     });
 }
+function getEtudiantMail(mail) {
+    return new Promise((resolve, reject) => {
+
+        bd.query('SELECT * FROM Etudiant WHERE mail=?',
+            [mail],
+            function (err, result) {
+                if (err) {
+                    reject(err);
+                }
+                resolve(result);
+            }
+        );
+    });
+}
 
 function getAllEtudiant() {
     return new Promise((resolve, reject) => {
@@ -45,4 +60,4 @@ function getAllEtudiant() {
 }
 
 
-module.exports = {getAllEtudiant, getEtudiant, addEtudiant};
+module.exports = {getAllEtudiant, getEtudiant, addEtudiant, getEtudiantMail};

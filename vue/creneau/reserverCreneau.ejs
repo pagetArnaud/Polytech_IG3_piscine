@@ -1,0 +1,33 @@
+<%- include('../commun/head'); %>
+
+<body>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">date</th>
+        <th scope="col">heure</th>
+        <th scope="col">salle</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody id="listeCreneau">
+    <% data.forEach(function(row) { %>
+        <% var date = new Date(row.date); %>
+        <tr>
+            <td><%= date.getDate() %>/<%= date.getMonth() + 1 %>/<%= date.getFullYear() %></td>
+            <td><%= row.heureDebut %></td>
+            <td><%= row.salle %></td>
+            <td>
+                <form action="" method="post">
+                    <input type="hidden" id="idCreneau" name="idCreneau" value="<%= row.num %>">
+                    <button class="button" type="submit">Join</button>
+                </form>
+            </td>
+        </tr>
+    <% }); %>
+    </tbody>
+</table>
+
+</body>
+
+<%- include('../commun/footer'); %>

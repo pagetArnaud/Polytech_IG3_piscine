@@ -1,66 +1,41 @@
-var express = require('express');
-var router = express.Router();
-var model_etudiant = require('../model/etudiant');
-var model_creneau = require('../model/creneau');
-var fs = require('fs');
-var groupe = require(path.join(__dirname, "groupe"));
+const express = require('express');
+const router = express.Router();
+const controller_etu = require('../controller/etudiants');
+const path = require("path");
+const groupe = require(path.join(__dirname, "groupe"));
+var auth = require("../lib/auth");
 
-function buildFile(req, res, chemin) {
-    fs.readFile(path.join(__dirname, "../vue/commun/head.html"), function (err, head) {
-        if (err) {
-            console.log(err);
-            res.status(404).send('Page introuvable !!!! ');
-        } else {
-            fs.readFile(chemin, function (err, data) {
-                if (err) {
-                    console.log(err);
-                    res.status(404).send('Page introuvable !!!! ');
-                } else {
-                    fs.readFile(path.join(__dirname, "../vue/commun/footer.html"), function (err, footer) {
-                        if (err) {
-                            console.log(err);
-                            res.status(404).send('Page introuvable !!!! ');
-                        } else {
-                            ouput = head.toString().concat(data.toString(), footer.toString());
-                            res.send(ouput);
-                        }
-                    })
-                }
-            });
-        }
-    });
-}
 
-// Home page route.
-router.get('/', function (req, res) {
-    buildFile(req, res, path.join(__dirname, "../vue/connexion/login.html"));
+router.use(function (req, res, next) {
+    var cookie = req.cookies["session"];
 
+    var token = auth.getTokenCookie(cookie);
+    console.log("on check le token dans etu");
+    console.log(token);
+    if (token) {
+        req.token = token; //On passe le token au prochain middleware si il est bien décrypté
+        next()
+    } else { //Si on ne peut pas decripter le token ou si le cookie n'existe pas, on demande de se re-login
+        console.log("on ne peut pas decrypter le token etu");
+        res.redirect('../login')
+    }
 });
-
-router.get('/register', function (req, res) {
-    buildFile(req, res, path.join(__dirname, "../vue/connexion/register.html"));
-
+router.get("/", function (req, res) {
+    res.render("menu/index");
 });
-
 // About page route.
 router.use('/groupe', groupe);
 
-router.get('/creneau',
-    function (req, res) {
-        buildFile(req, res, path.join(__dirname, "../vue/creneau/selection.html"))
+router.get('/creneau', function (req, res) {
+    controller_etu.get_creneau(req, res)
+});
+router.get('/creneau/join', function (req, res) {
+    controller_etu.resa_Creneau(req, res)
+
 });
 
-router.get('/creneau/read', function (req, res) {
-    var prom =model_creneau.getAllcreneau();
-    prom.then((value) => {
-
-        res.send(value);
-
-    }).catch(
-        function (){
-            console.log("y'a une erreur dans la fonction ")
-        }
-    );
+router.post("/creneau/join", function (req, res) {
+    controller_etu.create_resa_Creneau(req, res)
 
 });
 
