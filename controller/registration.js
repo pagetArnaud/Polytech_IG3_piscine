@@ -48,7 +48,7 @@ exports.checkCorrectness = function (req, res, next) {
     }
 };
 exports.correctForm = function (req, res) {
-    console.log(req.body);
+
     data = req.body;
     num = data.studNo;
     //cryptage du mdp

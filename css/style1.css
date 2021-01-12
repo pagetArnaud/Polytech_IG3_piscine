@@ -1,0 +1,56 @@
+.tableau {
+    border-collapse: collapse;
+    min-width: 400px;
+    width:auto;
+    box-shadow:0 5px 50px rgba(0,0,0,0.15);
+    cursor:pointer;
+    margin:100px auto;
+    border: 100px #29a9ff ;
+
+
+}
+thead tr{
+    background-color: #29a9ff;
+    color: #fff;
+
+}
+th, td{
+    padding: 15px 50px;
+
+
+}
+td{
+    background-color: white;
+}
+tbody tr,td,th{
+    border: 0px solid #ddd;
+}
+a.btn.btn-primary{
+    margin:100px auto;
+    min-width: 0px;
+    padding: 10px 40px;
+    background-color: #29a9ff;
+    align-items: center;
+
+}
+body{
+    background-image: url("auditorim.jpg");
+    background-size: 100% ;
+    background-repeat: no-repeat;
+    background-color: #ddd;
+}
+
+nav{
+    min-height: 10vh;
+    display: flex;
+    align-items: center;
+    width:100%;
+    margin: auto;
+    padding:2rem;
+}
+nav ul{
+    display: flex;
+    flex: 1 1 40rem;
+    justify-content: space-around;
+    align-items: center;
+}

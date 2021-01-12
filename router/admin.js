@@ -11,7 +11,7 @@ router.use(function (req, res, next) {
     var cookie = req.cookies["session"];
     var token = auth.getTokenCookie(cookie);
     if (token) {
-        console.log("On est dans admin et un token");
+
         if (token.isAdmin) {//Si on est bien un admin
             req.token = token; //On passe le token au prochain middleware si il est bien décrypté
             next()

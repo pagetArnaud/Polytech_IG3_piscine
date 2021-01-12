@@ -6,6 +6,8 @@ const admin = require(path.join(__dirname, "admin"));
 const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 5000;
 const controller_etu = require('../controller/etudiants');
+var prof=require(path.join(__dirname,"enseignant"))
+var jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const registration = require('../controller/registration');
 const login = require('../controller/login');
@@ -20,11 +22,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+//accès aux ressources en static = par tout le monde. Utile pour les fichiers join tel que le css ou le js
+app.use(express.static(path.join(__dirname, "/../ressources")));
 
 
 app.get("/", function (req, res) {
     var cookie = req.cookies["session"];
-    console.log("on passe pas /");
+
     if (cookie) {//existe
         res.redirect('login')
     } else {
@@ -57,6 +61,7 @@ app.post('/login', login.login);
 //----------------------------------
 app.use("/etu",etu);//routeur vers les etudiants
 app.use("/admin",admin);//routeur admin
+app.use("/prof",prof);//dans URL/prof il passe la main au router prof
 
 app.use(function (req, res) {
     res.setHeader('Content-Type', 'text/plain');

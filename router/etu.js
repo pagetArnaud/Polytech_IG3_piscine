@@ -10,8 +10,7 @@ router.use(function (req, res, next) {
     var cookie = req.cookies["session"];
 
     var token = auth.getTokenCookie(cookie);
-    console.log("on check le token dans etu");
-    console.log(token);
+
     if (token) {
         req.token = token; //On passe le token au prochain middleware si il est bien décrypté
         next()
