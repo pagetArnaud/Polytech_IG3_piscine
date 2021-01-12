@@ -8,7 +8,9 @@ function login(req, res) {
 }
 
 function register(req, res) {
+    console.log("rooter register")
     res.render("connexion/register")
+
 }
 
 

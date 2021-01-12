@@ -11,20 +11,21 @@
     </tr>
     </thead>
     <tbody id="listeCreneau">
-    <% creneau.forEach(function(row) { %>
+
+    <% data.forEach(function(row) { %>
         <% var date = new Date(row.date); %>
         <tr>
             <td><%= date.getDate() %>/<%= date.getMonth() + 1 %>/<%= date.getFullYear() %></td>
             <td><%= row.heureDebut %></td>
             <td><%= row.salle %></td>
             <td>
-                <% if(row.groupe){ %>
+                <% if (row.groupe){ %>
                     <%= row.groupe %>
-                <% } else{ %> non definit
-                <% } %>
+                <% }else { %>
+                    <p>LIBRE</p>
             </td>
+            <% } %>
         </tr>
-
     <% }); %>
     </tbody>
 </table>

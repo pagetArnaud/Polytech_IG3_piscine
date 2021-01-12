@@ -4,7 +4,7 @@ var bcrypt = require("bcryptjs")
 const {check, validationResult} = require('express-validator')
 const promo = require ("../model/promo")
 //promo.addPromo("IG3")
-
+console.log("registration");
 exports.checkDataIsValidAndSanitize = [
     check("firstname")
         .isLength({ min: 3 })
@@ -14,6 +14,7 @@ exports.checkDataIsValidAndSanitize = [
         .isLength({ min: 3 })
         .withMessage("Le nom doit avoir au moins 3 lettres.")
         .trim(),
+
     //TODO: verif num étudiant
     check("name")
         .isLength({ min: 3 })
@@ -40,7 +41,7 @@ exports.checkDataIsValidAndSanitize = [
 ]
 exports.checkCorrectness = function (req, res, next) {
     const error = validationResult(req).formatWith(({ msg }) => msg);
-
+    console.log("checkCorrectness");
     const hasError = !error.isEmpty();
 
     if (hasError) {
@@ -52,6 +53,7 @@ exports.checkCorrectness = function (req, res, next) {
 }
 exports.correctForm = function (req, res) {
     //console.log(req.body)
+    console.log("correct fomr")
     data = req.body
     name = data.name
     firstname = data.firstname
