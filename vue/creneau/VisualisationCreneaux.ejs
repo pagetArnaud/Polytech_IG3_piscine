@@ -1,17 +1,19 @@
 <%- include('../commun/head'); %>
 
+
 <body>
-<table class="table">
+<table class="tableau-style">
     <thead>
     <tr>
-        <th scope="col">date</th>
-        <th scope="col">heure</th>
-        <th scope="col">salle</th>
-        <th scope="col">groupe</th>
+        <th>Nom/Prénom</th>
+        <th>Projet</th>
+        <th>Date</th>
+        <th>Salle</th>
+        <th>Heure</th>
+
     </tr>
     </thead>
-    <tbody id="listeCreneau">
-
+    <tbody>
     <% data.forEach(function(row) { %>
         <% var date = new Date(row.date); %>
         <tr>
@@ -28,9 +30,10 @@
         </tr>
     <% }); %>
     </tbody>
+
+
+
 </table>
-<a class="btn btn-primary" href="#" role="button">Modifier</a>
 
 </body>
-
 <%- include('../commun/footer'); %>
