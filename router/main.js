@@ -6,6 +6,10 @@ const admin = require(path.join(__dirname, "admin"));
 const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 5000;
 const controller_etu = require('../controller/etudiants');
+
+var controller_etu = require('../controller/etudiants');
+var prof=require(path.join(__dirname,"enseignant"))
+var jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const registration = require('../controller/registration');
 const login = require('../controller/login');
@@ -59,6 +63,7 @@ app.post('/login', login.login);
 //----------------------------------
 app.use("/etu",etu);//routeur vers les etudiants
 app.use("/admin",admin);//routeur admin
+app.use("/prof",prof);//dans URL/prof il passe la main au router prof
 
 app.use(function (req, res) {
     res.setHeader('Content-Type', 'text/plain');
