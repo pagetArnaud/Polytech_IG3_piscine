@@ -1,13 +1,19 @@
 <%- include('../commun/head'); %>
 
 <body>
+<form action="" method="post">
+    <label for="site-search">Nom du groupe</label>
+    <input type="search" name="idGroupe"
+           aria-label="Search through site content" required>
+
+
+
 <table class="table">
     <thead>
     <tr>
         <th scope="col">date</th>
         <th scope="col">heure</th>
         <th scope="col">salle</th>
-        <th scope="col">groupe</th>
         <th scope="col"></th>
     </tr>
     </thead>
@@ -19,18 +25,16 @@
             <td><%= row.heureDebut %></td>
             <td><%= row.salle %></td>
             <td>
-                <% if (row.groupe){ %>
-                    <%= row.groupe %>
-                <% }else { %>
-                    <p>LIBRE</p>
+
+                    <input type="radio" name="idCreneau" value="<%= row.num %>">
+
             </td>
-            <% } %>
         </tr>
     <% }); %>
     </tbody>
-
 </table>
-<a class="btn btn-primary" href="modification">Modifier</a>
+    <button class="button" type="submit">Choisir</button>
+</form>
 </body>
 
 <%- include('../commun/footer'); %>
