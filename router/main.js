@@ -20,11 +20,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+//accès aux ressources en static = par tout le monde. Utile pour les fichiers join tel que le css ou le js
+app.use(express.static(path.join(__dirname, "/../ressources")));
 
 
 app.get("/", function (req, res) {
     var cookie = req.cookies["session"];
-    console.log("on passe pas /");
+
     if (cookie) {//existe
         res.redirect('login')
     } else {
