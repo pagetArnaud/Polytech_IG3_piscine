@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, "/../ressources")));
 
 app.get("/", function (req, res) {
     var cookie = req.cookies["session"];
-    console.log("on passe pas /");
+
     if (cookie) {//existe
         res.redirect('login')
     } else {

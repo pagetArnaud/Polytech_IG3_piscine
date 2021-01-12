@@ -34,7 +34,7 @@ function register(req, res) {
 function get_creneau(req, res) {
     var etu = req.token;
     var prom = model_creneau.getCreneauEtu(etu.numEtu);
-    console.log(etu);
+
     prom.then((value) => {
         res.render("creneau/consultationCreneau", {data: value[0], etu: etu});
 
