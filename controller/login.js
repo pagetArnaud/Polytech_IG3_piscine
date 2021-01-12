@@ -37,10 +37,10 @@ exports.login = (req, res) => {
             console.log("Row num: " + row.num);
 
             if (admins.includes(row.num * 1)) {
-                res.cookie("session", auth.cree(row.num, row.nom, row.prenom, true), {expires : 0}); //expires signifie que dès qu'on ferme le navigateur, le cookie est expiré
+                res.cookie("session", auth.cree(row.num, row.nom, row.prenom, undefined, true), {expires: 0}); //expires signifie que dès qu'on ferme le navigateur, le cookie est expiré
                 res.redirect("/admin/")
             } else {
-                res.cookie("session", auth.cree(row.num, row.nom, row.prenom, false), {expires : 0});
+                res.cookie("session", auth.cree(row.num, row.nom, row.prenom, row.promo, false), {expires: 0});
                 res.redirect("/etu/")
             }
         }).catch((err) => {
