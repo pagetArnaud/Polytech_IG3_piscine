@@ -6,8 +6,6 @@ const admin = require(path.join(__dirname, "admin"));
 const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 5000;
 const controller_etu = require('../controller/etudiants');
-
-var controller_etu = require('../controller/etudiants');
 var prof=require(path.join(__dirname,"enseignant"))
 var jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
