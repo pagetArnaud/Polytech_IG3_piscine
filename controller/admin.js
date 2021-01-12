@@ -25,7 +25,7 @@ function getCreneau(req, res) {
 function modif_creneau(req, res) {
     var prom = model_creneau.getCreneauDispo();
     prom.then((value) => {
-       // console.log(value);
+
         res.render("creneau/modificationDeCreneaux", {data: value});
 
     }).catch((error) => {
@@ -39,7 +39,7 @@ function modif_creneau(req, res) {
 function consult_creneau(req, res) {
     var prom = model_creneau.getAllcreneau();
     prom.then((value) => {
-      //  console.log(value);
+
         res.render("creneau/consultation_creneau", {data: value});
 
     }).catch((error) => {

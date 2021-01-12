@@ -48,7 +48,8 @@ function get_creneau(req, res) {
 
 function resa_Creneau(req, res) {
     var etu = req.token;//Recupère info de l'étudiant
-    var prom = model_creneau.getCreneauDispo();
+
+    var prom = model_creneau.getCreneauDispoOfPromo(etu.promo);
     prom.then((value) => {
 
         res.render("creneau/reserverCreneau", {data: value, etu: etu});

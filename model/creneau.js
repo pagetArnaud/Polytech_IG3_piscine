@@ -42,6 +42,18 @@ function getAllcreneau() {
     });
 }
 
+function getCreneauDispoOfPromo(promo) {
+    return new Promise((resolve, reject) => {
+        bd.query("SELECT * FROM Creneau c JOIN Evenement e on e.id=c.event WHERE e.promo=? and c.groupe is NULL", [promo],
+            function (err, result) {
+                if (err) {
+                    reject(err);
+                }
+                resolve(result);
+            });
+    });
+}
+
 function getCreneauDispo() {
     //Donne la liste des créneaux disponible (= qui ne sont pas reservé par un groupe)
     return new Promise((resolve, reject) => {
@@ -69,6 +81,18 @@ function reserveCreneau(idGroup, idCreneau) {
             });
     });
 }
+function getAllCreneauProf(){
+    sql="SELECT c.date,c.heureDebut,c.salle,c.num,e.nom,e.prenom FROM Creneau c JOIN Composer g on g.groupe=c.groupe JOIN Etudiant e ON g.etudiant=e.num"
+    return new Promise((resolve, reject) => {
+        bd.query (sql,
+            function(err, result){
+                if (err) {
+                    reject(err);
+                }
+                resolve(result);
+            });
+    });
+}
 
 
 /*
@@ -85,4 +109,4 @@ function updateByGroup(groupe) {
 }
 */
 
-module.exports = {getAllcreneau, getcreneau, getCreneauEtu, getCreneauDispo, reserveCreneau};
+module.exports = {getAllcreneau, getcreneau, getCreneauEtu, getCreneauDispo, reserveCreneau, getCreneauDispoOfPromo,getAllCreneauProf};
