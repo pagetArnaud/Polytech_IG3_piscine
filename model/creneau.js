@@ -67,13 +67,28 @@ function getCreneauDispo() {
     });
 }
 
-function reserveCreneau(idGroup, idCreneau) {
+function reserveCreneauAdmin(idGroup, idCreneau) {
     return new Promise((resolve, reject) => {
         bd.query('CALL resa_creneau(?,?)', [idGroup, idCreneau],
             //resa_creneau(idGroup,idCreneau) suppose que idCreneau est dispo. Si le groupe a deja choisi un creneau,
             //alors on annule la resa du premier creneau et on reserve le creneau IdCreneau
 
             function (err, result) {
+                if (err) {
+                    reject(err);
+                }
+                resolve(result);
+            });
+    });
+}
+function reserveCreneau(idGroup, idCreneau) {
+    return new Promise((resolve, reject) => {
+        bd.query('SELECT resa_creneau(?,?) as etat', [idGroup, idCreneau],
+            //resa_creneau(idGroup,idCreneau) suppose que idCreneau est dispo. Si le groupe a deja choisi un creneau,
+            //alors on annule la resa du premier creneau et on reserve le creneau IdCreneau
+
+            function (err, result) {
+
                 if (err) {
                     reject(err);
                 }
@@ -109,4 +124,13 @@ function updateByGroup(groupe) {
 }
 */
 
-module.exports = {getAllcreneau, getcreneau, getCreneauEtu, getCreneauDispo, reserveCreneau, getCreneauDispoOfPromo,getAllCreneauProf};
+module.exports = {
+    getAllcreneau,
+    getcreneau,
+    getCreneauEtu,
+    getCreneauDispo,
+    reserveCreneau,
+    getCreneauDispoOfPromo,
+    getAllCreneauProf,
+    reserveCreneauAdmin
+};
