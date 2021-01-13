@@ -25,7 +25,7 @@ router.use(function (req, res, next) {
 });
 // Home page route.
 router.get('/', function (req, res) {
-    res.send("bienvenu chez les admin")
+    res.send("bienvenue chez les admin")
 });
 
 // About page route.
@@ -41,6 +41,16 @@ router.get('/evenement', function (req, res) {
 //Envoie formulaire à bdd
 router.post("/evenement", function (req, res) {
     controller_admin.addEvenement(req, res);
+});
+
+router.get('/creneau/creation', function (req, res) {
+    res.render(path.join(__dirname, "../vue/creneau/creation_creneau"));
+
+});
+
+//Envoie formulaire créneau à bdd
+router.post("/creneau/creation", function (req, res) {
+    controller_admin.addCreneau(req, res);
 });
 
 router.get('/creneau', function (req, res) {
