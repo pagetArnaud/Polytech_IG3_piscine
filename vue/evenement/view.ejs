@@ -1,0 +1,24 @@
+<body>
+<% if (evenement.length !== 0){ %>
+    <%evenement.forEach((e) => { %>
+        <div class="card">
+            <div class="card-body" style="background: #99d6dd;">
+                <h4 class="card-title"><%= e.nom %></h4>
+                <ul>
+                    <% var date = new Date(e.dateDebut); %>
+                    <% var datelim = new Date(e.dateLimiteResa); %>
+                    <li>Date de début de l'évènement: <span style="font-weight: bold"><%= date.getDate() %>/<%= date.getMonth() + 1 %>/<%= date.getFullYear() %></span></li>
+                    <li>Durée de l'évènement: <span style="font-weight: bold"><%= e.dureeEvent %> jours</span></li></li>
+                    <li>Date limite de réservation: <span style="font-weight: bold"><%= datelim.getDate() %>/<%= datelim.getMonth() + 1 %>/<%= datelim.getFullYear() %></span></li></li>
+                    <li>Durée des créneaux: <span style="font-weight: bold"><%= e.dureeCreneau %></span></li></li>
+                    <li>Nombre de membres du jury: <span style="font-weight: bold"><%= e.nbJury %></span></li></li>
+                    <li>Promotion concernée: <span style="font-weight: bold"><%= e.promo %></span></li></li>
+                </ul>
+            </div>
+        </div>
+    <%})%>
+<%}%>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
