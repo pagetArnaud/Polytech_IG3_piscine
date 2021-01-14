@@ -217,4 +217,19 @@ function getGroupe(id) {
     });
 }
 
-module.exports = {getGroupe,DeleteGrpLast,DeleteGrp,addGroupe,getGroupeEleve,checkEtu,DeleteGrpc,modnumEleve,modProf,modEntrepriseTut,modPrenomTuteur,modNomTuteur,modNomGroupe,addComposer};
+function getEleve(idGroupe) {
+    return new Promise((resolve, reject) => {
+        bd.query ('SELECT etudiant FROM composer WHERE groupe=?',
+        [idGroupe],
+            function(err, result){
+                if (err){
+                    
+                    reject(err);
+                }
+                resolve(result);
+            }
+        );
+        
+    });
+}
+module.exports = {getGroupe,DeleteGrpLast,DeleteGrp,addGroupe,getGroupeEleve,checkEtu,DeleteGrpc,modnumEleve,modProf,modEntrepriseTut,modPrenomTuteur,modNomTuteur,modNomGroupe,addComposer,getEleve};
