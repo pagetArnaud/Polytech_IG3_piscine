@@ -18,7 +18,7 @@ router.post('/cree', function (req, res) {
 
 // About page route.
 router.post('/alter', function (req, res) {
-    res.render("groupe/modification_de_groupe",  {id:req.body.idGroupe})
+    controller_grp.ModPage(req,res)
 });
 
 router.post('/change', function (req, res){
