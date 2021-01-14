@@ -96,7 +96,7 @@ function reserveCreneau(idGroup, idCreneau) {
     });
 }
 function getAllCreneauProf(){
-    sql="SELECT c.date,c.heureDebut,c.salle,c.num,e.nom,e.prenom FROM Creneau c JOIN Composer g on g.groupe=c.groupe JOIN Etudiant e ON g.etudiant=e.num"
+    sql = "SELECT c.date,c.heureDebut,c.salle,c.num,e.nom,e.prenom FROM Creneau c JOIN Composer g on g.groupe=c.groupe JOIN Etudiant e ON g.etudiant=e.num";
     return new Promise((resolve, reject) => {
         bd.query (sql,
             function(err, result){
