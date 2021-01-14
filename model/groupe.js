@@ -2,45 +2,43 @@ path = require("path")
 var bd = require(path.join(__dirname, "../lib/conf"));
 
 
-//fonction pour créer un groupe
+//fonction pour créer un Groupe
+//TODO pas de "nomGrp" dans la table
 function addGroupe(nomTuteurEntreprise,prenomTuteurEntreprise,nomEntreprise,TuteurEnseignant,nomGrp) {
     return new Promise((resolve, reject) => {
-        bd.query ('INSERT INTO groupe (nomTuteurEntreprise,prenomTuteurEntreprise,nomEntreprise,TuteurEnseignant,nomGrp) VALUES (?,?,?,?,?,?)',
+        bd.query('INSERT INTO Groupe (nomTuteurEntreprise,prenomTuteurEntreprise,nomEntreprise,TuteurEnseignant,nomGrp) VALUES (?,?,?,?,?)',
         [nomTuteurEntreprise,prenomTuteurEntreprise,nomEntreprise,TuteurEnseignant,nomGrp],
             function(err, result){
                 if (err){
-                    
+
                     reject(err);
                 }
                 resolve(result);
             }
         );
-        
+
     });
 }
 
-function addComposer(nomEtu,idGroupe) {
+function addComposer(nomEtu, idGroupe) {
     return new Promise((resolve, reject) => {
-        bd.query ('INSERT INTO composer (etudiant,groupe) VALUES (?,?)',
-        [nomEtu,idGroupe],
+        bd.query('INSERT INTO Composer (etudiant,Groupe) VALUES (?,?)',
+            [nomEtu, idGroupe],
             function(err, result){
                 if (err){
-                    
                     reject(err);
                 }
                 resolve(result);
             }
         );
-        
     });
-
 }
 
-//donne les groupes de l'élève
+//donne les Groupes de l'élève
 function getGroupeEleve(IdEleve) {
     return new Promise((resolve, reject) => {
 
-    bd.query ('SELECT * FROM groupe WHERE id IN (SELECT groupe FROM composer WHERE etudiant=?) ',
+        bd.query('SELECT * FROM Groupe WHERE id IN (SELECT Groupe FROM Composer WHERE etudiant=?) ',
         [IdEleve],
         function(err, result){
             if (err){
@@ -53,11 +51,10 @@ function getGroupeEleve(IdEleve) {
 }
 
 
-
-function checkEtu(num) { //fonction qui vérifie qu'un numéro pour créer un groupe est bien celui d'un étudiant
+function checkEtu(num) { //fonction qui vérifie qu'un numéro pour créer un Groupe est bien celui d'un étudiant
     return new Promise((resolve, reject) => {
 
-        bd.query ('SELECT COUNT(0) FROM etudiant WHERE num=? ',
+        bd.query('SELECT COUNT(0) FROM Etudiant WHERE num=? ',
             [num],
             function(err, result){
                 if (err){
@@ -72,14 +69,14 @@ function checkEtu(num) { //fonction qui vérifie qu'un numéro pour créer un gr
 function modNomGroupe(numGrp, nom) {
     return new Promise((resolve, reject) => {
 
-        bd.query ('UPDATE groupe SET nomGrp = ? WHERE id=?',
+        bd.query('UPDATE Groupe SET nomGrp = ? WHERE id=?',
             [nom, numGrp],
             function(err, result){
                 if (err){
-                    
+
                     reject(err);
                 }
-                
+
                 resolve(result);
             }
         );
@@ -90,7 +87,7 @@ function modNomGroupe(numGrp, nom) {
 function modNomTuteur(numGrp, nom) {
     return new Promise((resolve, reject) => {
 
-        bd.query ('UPDATE groupe SET NomTuteurEntreprise = ? WHERE id=?',
+        bd.query('UPDATE Groupe SET NomTuteurEntreprise = ? WHERE id=?',
             [nom,numGrp],
             function(err, result){
                 if (err){
@@ -105,7 +102,7 @@ function modNomTuteur(numGrp, nom) {
 function modPrenomTuteur(numGrp, nom) {
     return new Promise((resolve, reject) => {
 
-        bd.query ('UPDATE groupe SET prenomTuteurEntreprise = ? WHERE id=?',
+        bd.query('UPDATE Groupe SET prenomTuteurEntreprise = ? WHERE id=?',
             [nom,numGrp],
             function(err, result){
                 if (err){
@@ -120,7 +117,7 @@ function modPrenomTuteur(numGrp, nom) {
 function modEntrepriseTut(numGrp, nom) {
     return new Promise((resolve, reject) => {
 
-        bd.query ('UPDATE groupe SET nomEntreprise = ? WHERE id=?',
+        bd.query('UPDATE Groupe SET nomEntreprise = ? WHERE id=?',
             [nom,numGrp],
             function(err, result){
                 if (err){
@@ -135,7 +132,7 @@ function modEntrepriseTut(numGrp, nom) {
 function modProf(numGrp, num) {
     return new Promise((resolve, reject) => {
 
-        bd.query ('UPDATE groupe SET TuteurEnseignant = ? WHERE id=? ',
+        bd.query('UPDATE Groupe SET TuteurEnseignant = ? WHERE id=? ',
             [num,numGrp],
             function(err, result){
                 if (err){
@@ -150,7 +147,7 @@ function modProf(numGrp, num) {
 function modnumEleve(numGrp, num) {
     return new Promise((resolve, reject) => {
 
-        bd.query ('INSERT INTO composer (etudiant,groupe) VALUES (?,?)',
+        bd.query('INSERT INTO Composer (etudiant,Groupe) VALUES (?,?)',
             [num,numGrp],
             function(err, result){
                 if (err){
@@ -165,7 +162,7 @@ function modnumEleve(numGrp, num) {
 function DeleteGrpc(numGrp) {
     return new Promise((resolve, reject) => {
         parseInt(numGrp)
-        bd.query ('DELETE FROM composer WHERE groupe = ?',
+        bd.query('DELETE FROM Composer WHERE Groupe = ?',
             [numGrp],
             function(err, result){
                 if (err){
@@ -180,7 +177,7 @@ function DeleteGrpc(numGrp) {
 function DeleteGrp(numGrp) {
     return new Promise((resolve, reject) => {
         parseInt(numGrp)
-        bd.query ('DELETE FROM groupe WHERE id = ?',
+        bd.query('DELETE FROM Groupe WHERE id = ?',
             [numGrp],
             function(err, result){
                 if (err){
@@ -194,9 +191,9 @@ function DeleteGrp(numGrp) {
 
 function DeleteGrpLast() {
     return new Promise((resolve, reject) => {
-        
-        bd.query ('DELETE FROM groupe WHERE id = (SELECT MAX(id) FROM groupe)',
-            
+
+        bd.query('DELETE FROM Groupe WHERE id = (SELECT MAX(id) FROM Groupe)',
+
             function(err, result){
                 if (err){
                     reject(err);
@@ -205,6 +202,19 @@ function DeleteGrpLast() {
             }
         );
         });
+}
+function getGroupe(id) {
+    return new Promise((resolve, reject) => {
+        bd.query('SELECT * FROM Groupe WHERE id=?',
+            [id],
+            function(err, result){
+                if (err){
+                    reject(err);
+                }
+                resolve(result);
+            }
+        );
+    });
 }
 
 function getEleve(idGroupe) {
