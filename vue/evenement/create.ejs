@@ -1,4 +1,5 @@
 <%- include('../commun/head'); %>
+<link rel="stylesheet" href="/css/create_event.css">
 <body>
 <div>
     <form action="evenement" method="post" name="EVENT">
@@ -15,7 +16,7 @@
             </label>
         </div>
 
-        <div class="form-row">
+
 
             <div class="col">
                 <label for="exampleFormControlSelect1">Promo
@@ -26,7 +27,7 @@
 
                     </select></label>
             </div>
-            <div class=" col">
+            <div class="col">
                 <label>Duree evenement
                     <input type="number" name="dureeEvent" min="1" value="1" class="form-control">
                 </label>
@@ -36,21 +37,28 @@
                     <input type="number" name="nbrJury" min="1" value="1" class="form-control">
                 </label>
             </div>
-        </div>
-        <div class="form-group">
-            <label>Debut evenement</label>
-            <input type="date" name="dateDebut">
-        </div>
 
 
         <div class="form-group">
-            <label>Duree d'un creneau soutenance</label>
-            <input type="time" name="dureeCreneau">
+            <label>Debut évènement
+                <input type="date" name="dateDebut">
+            </label>
+
+        </div>
+
+
+        <div class="form-group">
+            <label>Durée d'un créneau de soutenance
+                <input type="time" name="dureeCreneau">
+            </label>
+
         </div>
 
         <div class="form-group">
-            <label>Date limite de resa</label>
-            <input type="date" name="dateLimiteResa">
+            <label>Date limite de réservation
+                <input type="date" name="dateLimiteResa">
+            </label>
+
         </div>
 
         <button type="submit" class="btn btn-primary" value="post">Envoyer</button>

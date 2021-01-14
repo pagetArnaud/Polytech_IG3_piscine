@@ -98,7 +98,7 @@ function reserveCreneau(req, res) {
     var prom = model_creneau.reserveCreneau(req.body.idGroupe,req.body.idCreneau);
     prom.then((value) => {
         console.log(value);
-        res.redirect("../");
+        res.redirect("../creneau");
 
     }).catch(
         function (){
