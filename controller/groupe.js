@@ -5,7 +5,7 @@ function getGroupe(req, res) {
     var prom = model_groupe.getGroupeEleve(req.token.numEtu);
     
     prom.then((value) => {
-        console.log(value)
+        
         res.render('groupe/consultation_de_groupe', {groupe:value})
 
     }).catch((error) => {
