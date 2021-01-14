@@ -1,5 +1,5 @@
 <%- include('../commun/head'); %>
-
+<link rel="stylesheet" href="/css/Visualisation_creneau.css">
 
 <body>
 <table class="tableau-style">
@@ -10,6 +10,7 @@
         <th>Date</th>
         <th>Salle</th>
         <th>Heure</th>
+        <th>Groupe</th>
 
     </tr>
     </thead>
@@ -17,9 +18,13 @@
     <% data.forEach(function(row) { %>
         <% var date = new Date(row.date); %>
         <tr>
+
             <td><%= date.getDate() %>/<%= date.getMonth() + 1 %>/<%= date.getFullYear() %></td>
-            <td><%= row.heureDebut %></td>
             <td><%= row.salle %></td>
+
+            <td><%= row.heureDebut %></td>
+
+
             <td>
                 <% if (row.groupe){ %>
                     <%= row.groupe %>
