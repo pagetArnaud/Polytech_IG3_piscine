@@ -3,25 +3,94 @@
 <body>
 <h4>Information groupe soutenance</h4>
 <div class="container" style="height: 284px;width: 1203px;padding: 0px;border-style: solid;">
-    <div class="btn-group" role="group"></div>
-    <div class="btn-toolbar">
-        <div class="btn-group" role="group"></div>
-        <div class="btn-group" role="group"></div>
-    </div>
-    <p>Type d'évènement : <select>
-            <optgroup label="This is a group">
-                <option value="12" selected="">This is item 1</option>
-                <option value="13">This is item 2</option>
-                <option value="14">This is item 3</option>
-            </optgroup>
-        </select></p>
-    <p>Nombre d'étudiant<input type="number"></p>
-    <ul style="border-style: solid;">
-        <li>Numéro étudiant 1 <input type="number"></li>
-        <li>Numéro étudiant 2 <input type="number"></li>
-        <li>Numéro étudiant 3 <input type="number"></li>
-        <li>Numéro étudiant<br><br><input type="number"></li>
-    </ul>
+    <form action="change" method="post" class="form-title form-group">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-6">
+                <label for="name">Nom du groupe</label>
+            </div>
+
+            <div class="col-12 col-md-12 col-lg-6">
+                <input type="text" id="name" name="NomGroupe" value="None"
+                       size="20" placeholder="Nom groupe" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-6 label">
+                <label for="name2">Numéro élève A</label>
+            </div>
+            <div class="col-12 col-md-12 col-lg-6 input">
+                <input type="text" id="name2" name="numEleveA" value="None"
+                       size="20" maxlength="20" required class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-6 label">
+                <label for="name3">Numéro élève B</label>
+            </div>
+            <div class="col-12 col-md-12 col-lg-6 input">
+                <input type="text" id="name3" name="numEleveB" value="None"
+                       size="20" maxlength="20" required class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-6 label">
+                <label for="name2">Numéro élève C</label>
+            </div>
+            <div class="col-12 col-md-12 col-lg-6 input">
+                <input type="text" id="name2" name="numEleveC" value="None"
+                       size="20" maxlength="20" required class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-6 label">
+                <label for="name3">Numéro élève D</label>
+            </div>
+            <div class="col-12 col-md-12 col-lg-6 input">
+                <input type="text" id="name3" name="numEleveD" value="None"
+                       size="20" maxlength="20" required class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-6 label">
+                <label for="name3">Numéro élève E</label>
+            </div>
+            <div class="col-12 col-md-12 col-lg-6 input">
+                <input type="text" id="name3" name="numEleveE" value="None"
+                       size="20" maxlength="20" required class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-6 label checkbox">
+                <label for="name4">Nom tuteur</label>
+            </div>
+            <div class="col-12 col-md-12 col-lg-6 input" >
+                <input type="text" id="name4" name="NomTuteur" value="None"
+                       size="20" required class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-6 label">
+                <label for="name5">Prénom tuteur</label>
+            </div>
+            <div class="col-12 col-md-12 col-lg-6 input">
+                <input type="text" id="name5" name="PrenomTuteur" value="None"
+                       size="20" required class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-6 label">
+                <label for="name6">Entreprise tuteur</label>
+            </div>
+            <div class="col-12 col-md-12 col-lg-6 input">
+                <input type="text" id="name6" name="EntrepriseTut" value="None"
+                       size="20" required class="form-control">
+            </div>
+        </div>
+        <div class="button">
+            <input type="hidden" name="idGroupe" value="<%= id %>" >
+            <button class="btn btn-light" type="submit">Modifier le groupe</button>
+        </div>
+    </form>
 </div>
 </body>
 <%- include('../commun/footer'); %>

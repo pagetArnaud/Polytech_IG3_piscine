@@ -2,36 +2,24 @@
 
 <body>
 <div class="container">
-    <form action="/nom-groupe" method="post" class="form-title form-group">
+    <form action="cree" method="post" class="form-title form-group">
         <div class="row">
             <div class="col-12 col-md-12 col-lg-6">
                 <label for="name">Nom du groupe</label>
             </div>
 
             <div class="col-12 col-md-12 col-lg-6">
-                <input type="text" id="name" name="Nom groupe"
-                       size="20" placeholder="Nom groupe" class="form-control">
-            </div>
-        </div>
-    </form>
-
-    <form action="/nom-groupe" method="post" class="form form-group">
-        <div class="row">
-            <div class="col-12 col-md-12 col-lg-6 label">
-                <label for="name1">Filière</label>
-            </div>
-            <div class="col-12 col-md-12 col-lg-6 input">
-                <input type="text" id="name1" name="Filière"
-                       size="20" maxlength="3" required class="form-control">
+                <input type="text" id="name" name="nomGrp"
+                       size="30" placeholder="Nom groupe" class="form-control">
             </div>
         </div>
         <div class="row">
-            <div class="col-12 col-md-12 col-lg-6 label">
+            <div class="col-12 col-md-12 col-lg-6 label"></div>
                 <label for="name2">Numéro élève A</label>
             </div>
             <div class="col-12 col-md-12 col-lg-6 input">
-                <input type="text" id="name2" name="num-elev-a"
-                       size="20" maxlength="8" required class="form-control">
+                <input type="text" id="name2" name="numEleveA"
+                       size="20" maxlength="10" required class="form-control">
             </div>
         </div>
         <div class="row">
@@ -39,16 +27,44 @@
                 <label for="name3">Numéro élève B</label>
             </div>
             <div class="col-12 col-md-12 col-lg-6 input">
-                <input type="text" id="name3" name="num-elev-b"
-                       size="20" maxlength="8" required class="form-control">
+                <input type="text" id="name3" name="numEleveB" value="None"
+                       size="20" maxlength="10" required class="form-control">
             </div>
         </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-6 label">
+                <label for="name2">Numéro élève C</label>
+            </div>
+            <div class="col-12 col-md-12 col-lg-6 input">
+                <input type="text" id="name2" name="numEleveC" value="None"
+                       size="20" maxlength="10" required class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-6 label">
+                <label for="name3">Numéro élève D</label>
+            </div>
+            <div class="col-12 col-md-12 col-lg-6 input">
+                <input type="text" id="name3" name="numEleveD" value="None"
+                       size="20" maxlength="10" required class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-6 label">
+                <label for="name3">Numéro élève E</label>
+            </div>
+            <div class="col-12 col-md-12 col-lg-6 input">
+                <input type="text" id="name3" name="numEleveE" value="None"
+                       size="20" maxlength="10" required class="form-control">
+            </div>
+        </div>
+        <p>Laissez vide dans les champs en trop<p\>
         <div class="row">
             <div class="col-12 col-md-12 col-lg-6 label checkbox">
                 <label for="name4">Nom tuteur</label>
             </div>
             <div class="col-12 col-md-12 col-lg-6 input" >
-                <input type="text" id="name4" name="Nom tuteur"
+                <input type="text" id="name4" name="NomTuteur"
                        size="20" required class="form-control">
             </div>
         </div>
@@ -57,7 +73,7 @@
                 <label for="name5">Prénom tuteur</label>
             </div>
             <div class="col-12 col-md-12 col-lg-6 input">
-                <input type="text" id="name5" name="prénom tuteur"
+                <input type="text" id="name5" name="PrenomTuteur"
                        size="20" required class="form-control">
             </div>
         </div>
@@ -66,7 +82,7 @@
                 <label for="name6">Entreprise tuteur</label>
             </div>
             <div class="col-12 col-md-12 col-lg-6 input">
-                <input type="text" id="name6" name="entreprise tut"
+                <input type="text" id="name6" name="EntrepriseTut"
                        size="20" required class="form-control">
             </div>
         </div>
