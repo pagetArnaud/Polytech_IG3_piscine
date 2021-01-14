@@ -73,7 +73,7 @@ function addGroupe(req, res) {
         }).catch((error) => {
     
             console.log(error);
-            res.send(error);
+
             res.redirect('/etu/groupe/')
             }
         );
@@ -83,7 +83,7 @@ function addGroupe(req, res) {
     }).catch((error) => {
 
         console.log(error);
-        res.send(error);
+
         res.redirect('/etu/groupe/')
     });
     
@@ -142,8 +142,8 @@ function ModGroupe(req, res) { //on regarde où on doit faire une modification
     }).catch((error) => {
 
             console.log(error);
-            res.send(error);
-            res.redirect('/etu/groupe/')
+
+        res.redirect('/etu/groupe/')
         }
     );
     
