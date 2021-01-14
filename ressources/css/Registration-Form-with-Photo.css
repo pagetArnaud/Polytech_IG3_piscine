@@ -1,5 +1,5 @@
 .register-photo {
-    background: #f1f7fc;
+    background: white;
     padding: 80px 0;
 }
 
@@ -56,7 +56,7 @@
 }
 
 .register-photo form .btn-primary {
-    background: #f4476b;
+    background: #007bff;
     border: none;
     border-radius: 4px;
     padding: 11px;
@@ -67,7 +67,7 @@
 }
 
 .register-photo form .btn-primary:hover, .register-photo form .btn-primary:active {
-    background: #eb3b60;
+    background: #e2e3e5;
 }
 
 .register-photo form .btn-primary:active {
@@ -78,7 +78,7 @@
     display: block;
     text-align: center;
     font-size: 12px;
-    color: #6f7a85;
+    color: #29a9ff;
     opacity: 0.9;
     text-decoration: none;
 }

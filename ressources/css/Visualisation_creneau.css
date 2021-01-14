@@ -1,16 +1,5 @@
-.tableau {
-    border-collapse: collapse;
-    min-width: 400px;
-    width:auto;
-    box-shadow:0 5px 50px rgba(0,0,0,0.15);
-    cursor:pointer;
-    margin:100px auto;
-    border: 100px #007bff ;
-
-
-}
 thead tr{
-    background-color: #007bff;
+    background-color: #007bff;;
     color: #fff;
 
 }
@@ -20,10 +9,11 @@ th, td{
 
 }
 td{
-    background-color: white;
+    background-color: whitesmoke;
 }
 tbody tr,td,th{
     border: 0px solid #ddd;
+
 }
 a.btn.btn-primary{
     margin:100px auto;
@@ -34,10 +24,10 @@ a.btn.btn-primary{
 
 }
 body{
-    background-image: url("/img/auditorim.jpg");
     background-size: 100% ;
-    background-repeat: no-repeat;
     background-color: #ddd;
+    background-repeat: no-repeat;
+    background-image: url("/img/projet.jpg");
 }
 
 nav{
