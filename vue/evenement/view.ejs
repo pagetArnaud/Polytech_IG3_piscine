@@ -1,4 +1,6 @@
+<%- include('../commun/headAdmin'); %>
 <body>
+<a href="evenement" class="btn btn-primary" type="button" style="width: 366px;height: 64px;font-size: 28px;margin: 0px;margin-top: 10px;margin-bottom: 10px;">Créer un évènement</a>
 <% if (evenement.length !== 0){ %>
     <%evenement.forEach((e) => { %>
         <div class="card">

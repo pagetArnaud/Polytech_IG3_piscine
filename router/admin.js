@@ -28,7 +28,7 @@ router.use(function (req, res, next) {
 });
 // Home page route.
 router.get('/', function (req, res) {
-    res.send("bienvenu chez les admin")
+    res.render("menu/admin")
 });
 
 router.get('/voirEvenement', function (req, res) {
