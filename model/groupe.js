@@ -19,10 +19,10 @@ function addGroupe(nomTuteurEntreprise,prenomTuteurEntreprise,nomEntreprise,Tute
     });
 }
 
-function addComposer(nomEtu) {
+function addComposer(nomEtu,idGroupe) {
     return new Promise((resolve, reject) => {
-        bd.query ('INSERT INTO composer (etudiant,groupe) VALUES (?,(SELECT MAX(id) FROM groupe))',
-        [nomEtu],
+        bd.query ('INSERT INTO composer (etudiant,groupe) VALUES (?,?)',
+        [nomEtu,idGroupe],
             function(err, result){
                 if (err){
                     
@@ -207,4 +207,19 @@ function DeleteGrpLast() {
         });
 }
 
-module.exports = {DeleteGrpLast,DeleteGrp,addGroupe,getGroupeEleve,checkEtu,DeleteGrpc,modnumEleve,modProf,modEntrepriseTut,modPrenomTuteur,modNomTuteur,modNomGroupe,addComposer};
+function getEleve(idGroupe) {
+    return new Promise((resolve, reject) => {
+        bd.query ('SELECT etudiant FROM composer WHERE groupe=?',
+        [idGroupe],
+            function(err, result){
+                if (err){
+                    
+                    reject(err);
+                }
+                resolve(result);
+            }
+        );
+        
+    });
+}
+module.exports = {DeleteGrpLast,DeleteGrp,addGroupe,getGroupeEleve,checkEtu,DeleteGrpc,modnumEleve,modProf,modEntrepriseTut,modPrenomTuteur,modNomTuteur,modNomGroupe,addComposer,getEleve};
