@@ -78,7 +78,7 @@ function create_resa_Creneau(req, res) {
                         console.log("la date limite est dépasser")
                     }
                     //TODO Afficher un message à l'etudiant pour dire que la date limite de reservation est depasser
-                    res.redirect("../")
+                    res.redirect("./")
 
                 }).catch((error) => {
 

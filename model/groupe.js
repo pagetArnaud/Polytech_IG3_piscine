@@ -22,7 +22,7 @@ function addGroupe(nomTuteurEntreprise,prenomTuteurEntreprise,nomEntreprise,Tute
 
 function addComposer(nomEtu, idGroupe) {
     return new Promise((resolve, reject) => {
-        bd.query('INSERT INTO Composer (etudiant,Groupe) VALUES (?,?)',
+        bd.query('INSERT INTO Composer (etudiant,groupe) VALUES (?,?)',
             [nomEtu, idGroupe],
             function(err, result){
                 if (err){
@@ -147,7 +147,7 @@ function modProf(numGrp, num) {
 function modnumEleve(numGrp, num) {
     return new Promise((resolve, reject) => {
 
-        bd.query('INSERT INTO Composer (etudiant,Groupe) VALUES (?,?)',
+        bd.query('INSERT INTO Composer (etudiant,groupe) VALUES (?,?)',
             [num,numGrp],
             function(err, result){
                 if (err){
@@ -162,7 +162,7 @@ function modnumEleve(numGrp, num) {
 function DeleteGrpc(numGrp) {
     return new Promise((resolve, reject) => {
         parseInt(numGrp)
-        bd.query('DELETE FROM Composer WHERE Groupe = ?',
+        bd.query('DELETE FROM Composer WHERE groupe = ?',
             [numGrp],
             function(err, result){
                 if (err){
