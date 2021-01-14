@@ -232,4 +232,4 @@ function getEleve(idGroupe) {
         
     });
 }
-module.exports = {DeleteGrpLast,DeleteGrp,addGroupe,getGroupeEleve,checkEtu,DeleteGrpc,modnumEleve,modProf,modEntrepriseTut,modPrenomTuteur,modNomTuteur,modNomGroupe,addComposer,getEleve};
+module.exports = {getGroupe,DeleteGrpLast,DeleteGrp,addGroupe,getGroupeEleve,checkEtu,DeleteGrpc,modnumEleve,modProf,modEntrepriseTut,modPrenomTuteur,modNomTuteur,modNomGroupe,addComposer,getEleve};
