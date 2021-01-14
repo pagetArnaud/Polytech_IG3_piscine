@@ -7,6 +7,7 @@ var bodyParser = require("body-parser");
 var controller_admin = require('../controller/admin');
 var auth = require("../lib/auth");
 const ev = require("../model/evenement");
+const promoModel = require('../model/promo');
 
 
 router.use(function (req, res, next) {
@@ -47,7 +48,14 @@ router.get('/groupe', function (req, res) {
 });
 
 router.get('/evenement', function (req, res) {
-    res.render(path.join(__dirname, "../vue/evenement/create"));
+    promo = promoModel.getAllPromo();
+    promo.then((result) => {
+        res.render("evenement/create", {promo : result})
+    }).catch((err) => {
+        console.log(err)
+        res.render("evenement/create", {promo : []})
+    })
+    //res.render(path.join(__dirname, "../vue/evenement/create"));
 
 });
 
