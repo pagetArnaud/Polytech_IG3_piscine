@@ -28,27 +28,27 @@ function addGroupe(req, res) {
 
         var prom0 = model_groupe.addComposer(req.token.numEtu)
 
-        if ("None"!=idA) {//check pour savoir combien y a d'élèves à rajouter (max 5)        
+        if (""!=idA) {//check pour savoir combien y a d'élèves à rajouter (max 5)        
             if (0==model_groupe.checkEtu(idA)) {//check si l'élève existe
                 var prom1 = 1;
             }else {var prom1 = model_groupe.addComposer(idA)}
         }
-        if ("None"!=idB) {//check pour savoir combien y a d'élèves à rajouter (max 5)        
+        if (""!=idB) {//check pour savoir combien y a d'élèves à rajouter (max 5)        
             if (0==model_groupe.checkEtu(idB)) {//check si l'élève existe
                 var prom2 = 1;
             }else {var prom2 = model_groupe.addComposer(idB)}
         }
-        if ("None"!=idC) {//check pour savoir combien y a d'élèves à rajouter (max 5)        
+        if (""!=idC) {//check pour savoir combien y a d'élèves à rajouter (max 5)        
             if (0==model_groupe.checkEtu(idC)) {//check si l'élève existe
                 var prom3 = 1;
             }else {var prom3 = model_groupe.addComposer(idC)}
         }
-        if ("None"!=idD) {//check pour savoir combien y a d'élèves à rajouter (max 5)        
+        if (""!=idD) {//check pour savoir combien y a d'élèves à rajouter (max 5)        
             if (0==model_groupe.checkEtu(idD)) {//check si l'élève existe
                 var prom4 = 1;
             }else {var prom4 = model_groupe.addComposer(idD)}
         }
-        if ("None"!=idE) {//check pour savoir combien y a d'élèves à rajouter (max 5)        
+        if (""!=idE) {//check pour savoir combien y a d'élèves à rajouter (max 5)        
             if (0==model_groupe.checkEtu(idE)) {//check si l'élève existe
                 var prom5 = 1;
             }else {var prom5 = model_groupe.addComposer(idE)}
