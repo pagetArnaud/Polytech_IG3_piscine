@@ -1,4 +1,4 @@
-<%- include('../commun/head'); %>
+<%- include('../commun/headAdmin'); %>
 <link rel="stylesheet" href="/css/create_event.css">
 <body>
 <div>
@@ -20,10 +20,10 @@
 
             <div class="col">
                 <label for="exampleFormControlSelect1">Promo
-                    <select class="form-control" id="exampleFormControlSelect1" name="promo">
-                        <option>IG</option>
-                        <option>GBA</option>
-                        <option>MAT</option>
+                    <select class="form-control" id="exampleFormControlSelect1" name = "promo">
+                        <% for (var i = 0; i < promo.length; i++) { %>
+                            <option value= "<%= promo[i].id %>"><%= promo[i].id %></option>
+                        <%}%>
 
                     </select></label>
             </div>

@@ -39,6 +39,8 @@ app.get("/", function (req, res) {
 
 
 //Fonction personnel
+//TODO AAAAAAAAAAAA
+
 app.get("/log", function (req, res) {
     let date = new Date().toISOString();
     date = date.substring(0, 10) + ".log";
@@ -72,3 +74,4 @@ app.use(function (req, res) {
 http.listen(PORT, function () {
     console.log('Listening  ' + PORT)
 });
+
