@@ -10,11 +10,11 @@
 
             <div class="col-12 col-md-12 col-lg-6">
                 <input type="text" id="name" name="nomGrp"
-                       size="30" placeholder="Nom groupe" class="form-control">
+                       size="30" placeholder="Nom groupe" required class="form-control">
             </div>
         </div>
         <div class="row">
-            <div class="col-12 col-md-12 col-lg-6 label"></div>
+            <div class="col-12 col-md-12 col-lg-6 label">
                 <label for="name2">Numéro élève A</label>
             </div>
             <div class="col-12 col-md-12 col-lg-6 input">
@@ -58,13 +58,13 @@
                        size="20" maxlength="10" class="form-control">
             </div>
         </div>
-        <p>Laissez vide dans les champs en trop<p\>
+        <p>Laissez vide dans les champs en trop. Votre propre numéro est déjà pris en compte<p\>
         <div class="row">
             <div class="col-12 col-md-12 col-lg-6 label checkbox">
                 <label for="name4">Nom tuteur</label>
             </div>
             <div class="col-12 col-md-12 col-lg-6 input" >
-                <input type="text" id="name4" name="NomTuteur"
+                <input type="text" id="name4" required name="NomTuteur"
                        size="20" class="form-control">
             </div>
         </div>
@@ -73,7 +73,7 @@
                 <label for="name5">Prénom tuteur</label>
             </div>
             <div class="col-12 col-md-12 col-lg-6 input">
-                <input type="text" id="name5" name="PrenomTuteur"
+                <input type="text" id="name5" required name="PrenomTuteur"
                        size="20" class="form-control">
             </div>
         </div>
@@ -82,7 +82,7 @@
                 <label for="name6">Entreprise tuteur</label>
             </div>
             <div class="col-12 col-md-12 col-lg-6 input">
-                <input type="text" id="name6" name="EntrepriseTut"
+                <input type="text" id="name6" required name="EntrepriseTut"
                        size="20" class="form-control">
             </div>
         </div>
