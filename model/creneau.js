@@ -1,6 +1,6 @@
 
 var bd= require(path.join(__dirname,"../lib/conf"));
-
+var util=require("../lib/util");
 function getcreneau(num) {
     //Donne le créneau d'après son numero
     return new Promise((resolve, reject) => {
@@ -88,7 +88,6 @@ function reserveCreneau(idGroup, idCreneau) {
             //alors on annule la resa du premier creneau et on reserve le creneau IdCreneau
 
             function (err, result) {
-
                 if (err) {
                     reject(err);
                 }
@@ -109,6 +108,20 @@ function getAllCreneauProf(){
     });
 }
 
+function addCreneau(dateCreneau,heureDebut,duree,heureFin,evenement,salle) {
+    console.log(dateCreneau)
+    return new Promise((resolve, reject) => {
+        bd.query(' CALL `insert_creneau`(?,?,?,?,?,?);',
+            [dateCreneau,heureDebut, duree, heureFin, evenement, salle],
+            function(err, result){
+                if (err){
+                    reject(err);
+                }
+                resolve(result);
+            }
+        );
+    });
+}
 
 /*
 function updateByGroup(groupe) {
@@ -132,5 +145,6 @@ module.exports = {
     reserveCreneau,
     getCreneauDispoOfPromo,
     getAllCreneauProf,
-    reserveCreneauAdmin
+    reserveCreneauAdmin,
+    addCreneau
 };
