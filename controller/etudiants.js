@@ -74,6 +74,10 @@ function create_resa_Creneau(req, res) {
                 prom = model_creneau.reserveCreneau(idGroupe, cren);
                 prom.then((valeur) => {
 
+                    if (valeur[0].etat === -1) {
+                        console.log("la date limite est dépasser")
+                    }
+                    //TODO Afficher un message à l'etudiant pour dire que la date limite de reservation est depasser
                     res.redirect("../")
 
                 }).catch((error) => {

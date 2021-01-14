@@ -3,8 +3,7 @@ var router = express.Router();  //creer router
 var controller_prof = require('../controller/enseignant');//creation des chemins d'acces
 
 
-
-router.get('/creneau', function(req,res){
+router.get('/', function (req, res) {
     controller_prof.getCreneaux(req,res)
 });
 
