@@ -1,6 +1,6 @@
 
 var bd= require(path.join(__dirname,"../lib/conf"));
-
+var util=require("../lib/util");
 function getcreneau(num) {
     //Donne le créneau d'après son numero
     return new Promise((resolve, reject) => {
@@ -69,7 +69,7 @@ function getCreneauDispo() {
 
 function reserveCreneauAdmin(idGroup, idCreneau) {
     return new Promise((resolve, reject) => {
-        bd.query('CALL resa_creneau(?,?)', [idGroup, idCreneau],
+        bd.query('CALL resa_creneau_Admin(?,?)', [idGroup, idCreneau],
             //resa_creneau(idGroup,idCreneau) suppose que idCreneau est dispo. Si le groupe a deja choisi un creneau,
             //alors on annule la resa du premier creneau et on reserve le creneau IdCreneau
 
@@ -88,7 +88,6 @@ function reserveCreneau(idGroup, idCreneau) {
             //alors on annule la resa du premier creneau et on reserve le creneau IdCreneau
 
             function (err, result) {
-
                 if (err) {
                     reject(err);
                 }
@@ -97,7 +96,7 @@ function reserveCreneau(idGroup, idCreneau) {
     });
 }
 function getAllCreneauProf(){
-    sql="SELECT c.date,c.heureDebut,c.salle,c.num,e.nom,e.prenom FROM Creneau c JOIN Composer g on g.groupe=c.groupe JOIN Etudiant e ON g.etudiant=e.num"
+    sql = "SELECT c.date,c.heureDebut,c.salle,c.num,e.nom,e.prenom FROM Creneau c JOIN Composer g on g.groupe=c.groupe JOIN Etudiant e ON g.etudiant=e.num";
     return new Promise((resolve, reject) => {
         bd.query (sql,
             function(err, result){
@@ -109,6 +108,20 @@ function getAllCreneauProf(){
     });
 }
 
+function addCreneau(dateCreneau,heureDebut,duree,heureFin,evenement,salle) {
+    console.log(dateCreneau)
+    return new Promise((resolve, reject) => {
+        bd.query(' CALL `insert_creneau`(?,?,?,?,?,?);',
+            [dateCreneau,heureDebut, duree, heureFin, evenement, salle],
+            function(err, result){
+                if (err){
+                    reject(err);
+                }
+                resolve(result);
+            }
+        );
+    });
+}
 
 /*
 function updateByGroup(groupe) {
@@ -132,5 +145,6 @@ module.exports = {
     reserveCreneau,
     getCreneauDispoOfPromo,
     getAllCreneauProf,
-    reserveCreneauAdmin
+    reserveCreneauAdmin,
+    addCreneau
 };

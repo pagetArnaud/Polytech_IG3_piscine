@@ -6,6 +6,9 @@ var model_event = require("../model/evenement");
 var bodyParser = require("body-parser");
 var controller_admin = require('../controller/admin');
 var auth = require("../lib/auth");
+const ev = require("../model/evenement");
+const promoModel = require('../model/promo');
+
 
 router.use(function (req, res, next) {
     var cookie = req.cookies["session"];
@@ -25,8 +28,19 @@ router.use(function (req, res, next) {
 });
 // Home page route.
 router.get('/', function (req, res) {
-    res.send("bienvenu chez les admin")
+    res.render("menu/admin")
 });
+
+router.get('/voirEvenement', function (req, res) {
+    var eventPromise = ev.getAllEvenement();
+    eventPromise.then((event) => {
+        console.log(event)
+        res.render(path.join(__dirname, "../vue/evenement/view"), {evenement : event});
+    }).catch((err) => {
+        console.log("erreur a la recup des event")
+        res.render(path.join(__dirname, "../vue/evenement/view"), {evenement : []});
+    })
+})
 
 // About page route.
 router.get('/groupe', function (req, res) {
@@ -34,13 +48,30 @@ router.get('/groupe', function (req, res) {
 });
 
 router.get('/evenement', function (req, res) {
-    res.render(path.join(__dirname, "../vue/evenement/create"));
+    promo = promoModel.getAllPromo();
+    promo.then((result) => {
+        res.render("evenement/create", {promo : result})
+    }).catch((err) => {
+        console.log(err)
+        res.render("evenement/create", {promo : []})
+    })
+    //res.render(path.join(__dirname, "../vue/evenement/create"));
 
 });
 
 //Envoie formulaire à bdd
 router.post("/evenement", function (req, res) {
     controller_admin.addEvenement(req, res);
+});
+
+router.get('/creneau/creation', function (req, res) {
+    res.render(path.join(__dirname, "../vue/creneau/creation_creneau"));
+
+});
+
+//Envoie formulaire créneau à bdd
+router.post("/creneau/creation", function (req, res) {
+    controller_admin.addCreneau(req, res);
 });
 
 router.get('/creneau', function (req, res) {

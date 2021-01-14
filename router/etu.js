@@ -20,7 +20,15 @@ router.use(function (req, res, next) {
     }
 });
 router.get("/", function (req, res) {
-    res.render("menu/index");
+    console.log(req.query.success)
+    if (req.query.success == 1) {
+        console.log("oui ooui")
+        res.render('menu/index', {Registration : true})
+    }else {
+        res.render("menu/index");
+    }
+
+
 });
 // About page route.
 router.use('/groupe', groupe);

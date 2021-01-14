@@ -40,9 +40,14 @@ exports.checkCorrectness = function (req, res, next) {
 
     if (hasError) {
         console.log(error);
-        var pro = req.body.promo;
-        pro.id = req.body.promo;
-        res.render('connexion/register', {error: error.errors, promo: [pro]})
+        promoPromise = promo.getAllPromo();
+        promoPromise.then((result) => {
+            res.render("connexion/register", {error: error.errors, promo : result})
+        }).catch((err) => {
+            console.log(err)
+            res.render("connexion/register", {error: error.errors, promo : []})
+        })
+
     } else {
         next();
     }
@@ -60,8 +65,7 @@ exports.correctForm = function (req, res) {
     prom.then(() => {
         var token = auth.cree(data.studNo, data.name, data.firstname, false);
         res.cookie("session", token);
-
-        res.redirect("/etu/");
+        res.redirect("/etu/?success=1");
         //res.render('menu/index', {Registration : true})
     }).catch((err) => {
         //Si l'étudiant est déjà inscrit

@@ -68,7 +68,8 @@ function addEvenement(req, res) {
     var prom = model_event.addEvenement(req.body.name,req.body.dateDebut,req.body.dureeEvent,req.body.dateLimiteResa,req.body.dureeCreneau,req.body.nbrJury,req.body.promo);
     prom.then((value) => {
 
-        res.send("Evenement créé !");
+        //res.send("Evenement créé !");
+        res.redirect('../')
 
     }).catch((error) => {
         console.log(error);
@@ -77,21 +78,34 @@ function addEvenement(req, res) {
     );
 }
 
+function addCreneau(req, res) {
+    var prom = model_creneau.addCreneau(req.body.dateCreneau,req.body.heureDebut,req.body.duree,req.body.heureFin,req.body.evenement,req.body.salle);
+    prom.then((value) => {
+
+        //res.send("Creneau créé !")
+        res.redirect("/admin/creneau")
+
+    }).catch((error) => {
+            console.log(error);
+            res.send("Formulaire non rempli correctement");
+        }
+    );
+}
 
 function reserveCreneau(req, res) {
     console.log(req.body.idGroupe);
     console.log(req.body.idCreneau);
-    var prom = model_creneau.reserveCreneau(req.body.idGroupe,req.body.idCreneau);
+    var prom = model_creneau.reserveCreneauAdmin(req.body.idGroupe, req.body.idCreneau);
     prom.then((value) => {
         console.log(value);
-        res.redirect("../");
+        res.redirect("../creneau");
 
-    }).catch(
-        function (){
+    }).catch((error) => {
+        console.log(error);
             res.send("Pas modifié");
         }
     );
 }
 
 
-module.exports = {login, addEvenement, modif_creneau, consult_creneau, getGroupe, reserveCreneau};
+module.exports = {login, addEvenement, modif_creneau, consult_creneau, getGroupe, reserveCreneau, addCreneau};

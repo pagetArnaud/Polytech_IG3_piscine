@@ -1,0 +1,44 @@
+<%- include('../commun/head'); %>
+<body>
+<div>
+    <form action="creation" method="post" name="creation">
+        <div class="form-group">
+            <label for="site-search">Salle</label>
+            <input type="search" name="salle"
+                   aria-label="Search through site content" required>
+        </div>
+
+        <div class="form-group">
+            <label for="site-search">Evenement</label>
+            <input type="search" name="evenement"
+                   aria-label="Search through site content" required>
+        </div>
+        <div class="form-group">
+            <label>Date du créneau de soutenance</label>
+            <input type="date" name="dateCreneau">
+        </div>
+
+        <div class="form-group">
+            <label>Heure de début d'un creneau soutenance</label>
+            <input type="time" name="heureDebut">
+        </div>
+
+        <div class="form-group">
+            <label>Heure de fin d'un creneau soutenance</label>
+            <input type="time" name="heureFin">
+        </div>
+
+        <div class="form-group">
+            <label>Duree d'un creneau soutenance</label>
+            <input type="time" name="duree">
+        </div>
+
+        <button type="submit" class="btn btn-primary" value="post">Envoyer</button>
+
+
+    </form>
+</div>
+</body>
+
+
+<%- include('../commun/footer'); %>
