@@ -49,7 +49,7 @@ function addGroupe(req, res) {
                 var prom5 = 1;
             }else {var prom5 = model_groupe.addComposer(idE)}
         }
-        Promise.all.([prom1,prom2,prom3,prom4,prom5]).then((value) => {
+        Promise.all([prom1,prom2,prom3,prom4,prom5]).then((value) => {
             res.redirect('/etu/groupe/')
         }).catch((error) => {
     
@@ -61,13 +61,12 @@ function addGroupe(req, res) {
 
     
 
-        }).catch((error) => {
+    }).catch((error) => {
 
-            console.log(error);
-            res.send(error);
-            res.redirect('/etu/groupe/')
-        }
-    );
+        console.log(error);
+        res.send(error);
+        res.redirect('/etu/groupe/')
+    });
     
 }
 
@@ -117,7 +116,7 @@ function ModGroupe(req, res) { //on regarde où on doit faire une modification
             var prom10 = model_groupe.modnumEleve(req.body.idGroupe, req.body.numEleveE)
         }
     }
-    Promise.all.apply([prom,prom1,prom2,prom3,prom4,prom5,prom6,prom7,prom8,prom10,prom9]).then((value) => {
+    Promise.all([prom,prom1,prom2,prom3,prom4,prom5,prom6,prom7,prom8,prom10,prom9]).then((value) => {
         res.redirect('/etu/groupe/')
 
     }).catch((error) => {
@@ -143,7 +142,7 @@ function DeleteGroupe(req, res) {
             res.send(error);
             res.redirect('/etu/groupe/')
         }
-    }).catch((error) => {
+    )}).catch((error) => {
 
             console.log(error);
             res.send(error);
