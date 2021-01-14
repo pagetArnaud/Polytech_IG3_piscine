@@ -69,7 +69,7 @@ function getCreneauDispo() {
 
 function reserveCreneauAdmin(idGroup, idCreneau) {
     return new Promise((resolve, reject) => {
-        bd.query('CALL resa_creneau(?,?)', [idGroup, idCreneau],
+        bd.query('CALL resa_creneau_Admin(?,?)', [idGroup, idCreneau],
             //resa_creneau(idGroup,idCreneau) suppose que idCreneau est dispo. Si le groupe a deja choisi un creneau,
             //alors on annule la resa du premier creneau et on reserve le creneau IdCreneau
 

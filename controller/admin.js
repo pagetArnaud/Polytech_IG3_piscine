@@ -95,13 +95,13 @@ function addCreneau(req, res) {
 function reserveCreneau(req, res) {
     console.log(req.body.idGroupe);
     console.log(req.body.idCreneau);
-    var prom = model_creneau.reserveCreneau(req.body.idGroupe,req.body.idCreneau);
+    var prom = model_creneau.reserveCreneauAdmin(req.body.idGroupe, req.body.idCreneau);
     prom.then((value) => {
         console.log(value);
         res.redirect("../creneau");
 
-    }).catch(
-        function (){
+    }).catch((error) => {
+        console.log(error);
             res.send("Pas modifié");
         }
     );

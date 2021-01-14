@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/css/create_event.css">
 <body>
 <div>
-    <form action="evenement" method="post" name="EVENT">
+    <form action="/admin/evenement/" method="post" name="EVENT">
         <div class="form-check">
             <input class="form-check-input" type="radio" name="name" id="exampleRadios1" value="stage" checked>
             <label class="form-check-label" for="exampleRadios1">
@@ -28,7 +28,7 @@
                     </select></label>
             </div>
             <div class="col">
-                <label>Duree evenement
+                <label>Duree evenement(jour)
                     <input type="number" name="dureeEvent" min="1" value="1" class="form-control">
                 </label>
             </div>
@@ -48,7 +48,7 @@
 
 
         <div class="form-group">
-            <label>Durée d'un créneau de soutenance
+            <label>Durée d'un créneau de soutenance (Heure:Minute)
                 <input type="time" name="dureeCreneau">
             </label>
 
