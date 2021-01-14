@@ -126,7 +126,6 @@ function ModGroupe(req, res) { //on regarde où on doit faire une modification
     }).catch((error) => {
 
             console.log(error);
-            res.send(error);
             res.redirect('/etu/groupe/')
         }
     );
