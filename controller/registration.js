@@ -69,6 +69,7 @@ exports.correctForm = function (req, res) {
         //res.render('menu/index', {Registration : true})
     }).catch((err) => {
         //Si l'étudiant est déjà inscrit
+        res.redirect("/login/?already=1");
         console.log(err)
     })
 }

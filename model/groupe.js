@@ -219,7 +219,7 @@ function getGroupe(id) {
 
 function getEleve(idGroupe) {
     return new Promise((resolve, reject) => {
-        bd.query ('SELECT etudiant FROM composer WHERE groupe=?',
+        bd.query('SELECT etudiant FROM Composer WHERE groupe=?',
         [idGroupe],
             function(err, result){
                 if (err){
