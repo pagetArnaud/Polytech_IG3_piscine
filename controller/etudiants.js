@@ -15,7 +15,11 @@ function login(req, res) {
             res.redirect('etu');
         }
     } else { //Si on ne peut pas decripter le token ou si le cookie n'existe pas, on demande de se re-login
+        if (req.query.already == 1) {
+            res.render("connexion/login", {alreadyRegistered: true, loginFailed: false})
+        }
         res.render("connexion/login", {alreadyRegistered: false, loginFailed: false})
+
     }
 }
 
